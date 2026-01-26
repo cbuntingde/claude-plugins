@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Analyze code changes for performance implications",
+            "prompt": "You just modified code using {{tool_name}}. Analyze the changes for potential performance issues:\n\n1. Check for inefficient patterns (nested loops, repeated operations)\n2. Look for missing caching opportunities\n3. Identify any N+1 query problems\n4. Check for memory leaks or unnecessary allocations\n5. Verify async/await usage is optimal\n\nIf you find any performance concerns, provide specific suggestions for optimization. Focus on high-impact issues that would significantly affect performance."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Check for performance profiles on session start",
+            "command": "check-baseline.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*slow|performance|bottleneck|optimize|inefficient|laggy.*",
+        "hooks": [
+          {
+            "type": "agent",
+            "description": "Invoke performance analyst for performance-related queries",
+            "agent": "performance-analyst",
+            "messages": [
+              {
+                "role": "user",
+                "content": "The user is asking about performance issues. Analyze their query and provide performance optimization recommendations."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

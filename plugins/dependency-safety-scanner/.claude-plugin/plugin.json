@@ -1,0 +1,9 @@
+{
+  "name": "dependency-safety-scanner",
+  "version": "1.0.0",
+  "description": "Beyond basic vulnerability checking: Understand package acquisitions, maintainer abandonment, and dependency bloat before adding dependencies",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

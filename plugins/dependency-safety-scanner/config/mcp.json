@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "dependency-vulnerability-db": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/servers/vulnerability-db-server/index.js"
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        "DB_PATH": "${CLAUDE_PLUGIN_ROOT}/data/vulnerability.db",
+        "VULN_CACHE_TTL": "86400000"
+      }
+    },
+    "npm-audit-proxy": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/servers/npm-audit-proxy/index.js"
+      ],
+      "env": {
+        "AUDIT_CACHE_DIR": "${CLAUDE_PLUGIN_ROOT}/data/audit-cache",
+        "AUDIT_CACHE_TTL": "3600000"
+      }
+    }
+  }
+}

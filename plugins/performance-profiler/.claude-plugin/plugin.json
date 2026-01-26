@@ -1,0 +1,9 @@
+{
+  "name": "performance-profiler",
+  "version": "1.0.0",
+  "description": "Intelligent performance profiler that identifies bottlenecks and suggests optimizations",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

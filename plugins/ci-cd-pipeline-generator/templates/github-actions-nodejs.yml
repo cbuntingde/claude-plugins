@@ -1,0 +1,235 @@
+# GitHub Actions Workflow Template for Node.js Projects
+# This template provides a complete CI/CD pipeline for Node.js applications
+
+name: Node.js CI/CD Pipeline
+
+# Trigger conditions
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:  # Allow manual triggering
+
+# Environment variables
+env:
+  NODE_VERSION: '20'
+  NPM_CACHE_DIR: ~/.npm
+
+# Jobs
+jobs:
+  # Build and test job
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    # Strategy for matrix builds
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+      fail-fast: false  # Continue other builds if one fails
+
+    steps:
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Run linter
+      - name: Run linter
+        run: npm run lint --if-present
+
+      # Run type check
+      - name: Run type check
+        run: npm run type-check --if-present
+
+      # Run tests
+      - name: Run tests
+        run: npm test
+
+      # Generate coverage
+      - name: Generate coverage report
+        run: npm run test:coverage --if-present
+
+      # Upload coverage to Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        if: matrix.node-version == '20.x'
+        with:
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          name: codecov-umbrella
+
+      # Build application
+      - name: Build application
+        run: npm run build --if-present
+
+      # Upload build artifacts
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        if: matrix.node-version == '20.x'
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  # Security scanning job
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Run npm audit
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      # Run CodeQL analysis
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  # Deploy to staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build, security]
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    environment:
+      name: staging
+      url: https://staging.example.com
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Download build artifacts
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist/
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci --production
+
+      # Deploy to staging (example with Vercel)
+      - name: Deploy to Vercel (Staging)
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--preview'
+
+      # Run smoke tests
+      - name: Run smoke tests
+        run: npm run test:smoke --if-present
+        env:
+          BASE_URL: https://staging.example.com
+
+  # Deploy to production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build, security]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: production
+      url: https://example.com
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Download build artifacts
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist/
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci --production
+
+      # Deploy to production (example with Vercel)
+      - name: Deploy to Vercel (Production)
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+
+      # Run smoke tests
+      - name: Run smoke tests
+        run: npm run test:smoke --if-present
+        env:
+          BASE_URL: https://example.com
+
+      # Notify deployment
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "Deployment to production successful!"
+          # Add notification logic here (Slack, email, etc.)
+
+  # Rollback job (manual trigger)
+  rollback:
+    name: Rollback Production
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Rollback deployment (example with Vercel)
+      - name: Rollback Vercel Deployment
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--scope <team>'
+
+      - name: Notify rollback
+        run: |
+          echo "Rollback completed!"
+          # Add notification logic here

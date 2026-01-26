@@ -1,0 +1,109 @@
+{
+  "name": "dev-plugins",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "architecture-advisor",
+      "version": "1.0.0",
+      "description": "Provides architectural guidance and design pattern recommendations.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/architecture-advisor",
+      "license": "MIT"
+    },
+    {
+      "name": "dependency-safety-scanner",
+      "version": "1.0.0",
+      "description": "Analyzes npm dependencies for vulnerabilities, bloat, and license issues.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/dependency-safety-scanner",
+      "license": "MIT"
+    },
+    {
+      "name": "deployment-strategies-plugin",
+      "version": "1.0.0",
+      "description": "Helps generate deployment strategies for various platforms.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/deployment-strategies-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "ci-cd-pipeline-generator",
+      "version": "1.0.0",
+      "description": "Generates CI/CD pipelines for GitHub Actions, GitLab CI, and Jenkins with best practices and common patterns.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/ci-cd-pipeline-generator",
+      "license": "MIT"
+    },
+    {
+      "name": "doc-onboarding-plugin",
+      "version": "1.0.0",
+      "description": "Generates onboarding documentation for new developers.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/doc-onboarding-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "mcp-json-setup",
+      "version": "1.0.0",
+      "description": "Manages Claude Code MCP server configurations.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/mcp-json-setup",
+      "license": "MIT"
+    },
+    {
+      "name": "optimization-suggester",
+      "version": "1.0.0",
+      "description": "Suggests code optimizations and improvements.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/optimization-suggester",
+      "license": "MIT"
+    },
+    {
+      "name": "performance-profiler",
+      "version": "1.0.0",
+      "description": "Profiles and analyzes code performance.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/performance-profiler",
+      "license": "MIT"
+    },
+    {
+      "name": "tribal-knowledge-extractor",
+      "version": "1.0.0",
+      "description": "Mines git history for context about code evolution, patterns, and team knowledge.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/tribal-knowledge-extractor",
+      "license": "MIT"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "doc-onboarding",
+  "version": "1.0.0",
+  "description": "Generate onboarding documentation and developer guides from codebase analysis",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

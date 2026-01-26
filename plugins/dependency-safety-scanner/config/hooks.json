@@ -1,0 +1,69 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "when": "\"npm install\" in command || \"yarn add\" in command || \"pnpm add\" in command",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Extract all package names and versions from this install command: $ARGUMENTS. For each package, perform a dependency safety check:\n\n1. Check npm audit for vulnerabilities\n2. Check bundlephobia.com for install size and dependency count\n3. Check if maintainer is active (last publish, GitHub activity)\n4. Check license compatibility\n5. Check for known acquisition risks\n\nFor each package, provide:\n- Overall risk level (CRITICAL/HIGH/MEDIUM/LOW)\n- Specific findings (vulnerabilities, maintainer status, bloat, license)\n- Recommendation (BLOCK/WARN/APPROVE)\n\nIf any package is CRITICAL risk, recommend blocking the installation.\nIf any package is HIGH risk, warn and require explicit confirmation.\nIf all packages are LOW/MEDIUM risk, allow installation with informational notice."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "when": "\"npm install\" in command || \"yarn add\" in command || \"pnpm add\" in command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/post-install-scan.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "when": "file_path.endsWith('package.json')",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "The user just modified package.json. Analyze the dependency changes:\n\n1. What dependencies were added, removed, or updated?\n2. For each changed dependency, assess:\n   - Security vulnerabilities (check known CVEs)\n   - License compatibility with project\n   - Dependency bloat impact\n   - Maintainer status\n\n3. Provide a summary of changes with risk assessment\n4. Flag any concerning changes that need attention\n\nContext: The file changed was $ARGUMENTS.file_path"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if this is a Node.js/JavaScript/TypeScript project (look for package.json). If it is, scan the project for dependency safety issues:\n\n1. Run a quick vulnerability scan (check for critical CVEs)\n2. Check for obviously abandoned packages\n3. Flag any packages with recent license changes\n4. Provide a brief summary of dependency health\n\nIf critical issues are found, recommend running /scan-dependencies for a full analysis."
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "When the user is about to install packages and Claude asks for permission, this is a good opportunity to run dependency safety checks on the packages being installed.\n\nIf the permission request is for npm/yarn/pnpm install, add a safety note:\n- Mention that dependency safety checks are available\n- Offer to scan packages before approval\n- If critical risks are known, warn the user"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "when": "notification.type == 'error' && 'command' in notification && 'install' in notification.command",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "An install command failed. This could be due to:\n1. Dependency conflicts\n2. Vulnerability blockers\n3. Network issues\n4. Registry problems\n\nHelp the user troubleshoot by:\n1. Identifying the specific error\n2. Suggesting solutions (force install, resolve conflicts, etc.)\n3. If it's a security-related block, explain why and offer alternatives\n4. If it's a dependency conflict, suggest checking for incompatible versions\n\nError context: $ARGUMENTS"
+          }
+        ]
+      }
+    ]
+  }
+}

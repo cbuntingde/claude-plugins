@@ -1,0 +1,9 @@
+{
+  "name": "deployment-strategies-plugin",
+  "version": "1.0.0",
+  "description": "Generate deployment strategies including blue/green and canary deployments",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

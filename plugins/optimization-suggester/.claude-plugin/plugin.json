@@ -1,0 +1,9 @@
+{
+  "name": "optimization-suggester",
+  "version": "1.0.0",
+  "description": "Suggest code optimizations for caching, memoization, and async patterns",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

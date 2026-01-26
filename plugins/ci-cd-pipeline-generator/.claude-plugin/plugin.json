@@ -1,0 +1,9 @@
+{
+  "name": "ci-cd-pipeline-generator",
+  "version": "1.0.0",
+  "description": "Generate CI/CD pipelines for GitHub Actions, GitLab CI, and Jenkins with best practices and common patterns",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

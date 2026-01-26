@@ -1,0 +1,9 @@
+{
+  "name": "tribal-knowledge-extractor",
+  "version": "1.0.0",
+  "description": "Mine git history for context about code evolution, patterns, and team knowledge",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}
