@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "/scan-for-security-issues|analyze-quality|check-production-ready|detect-breakage",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/auto-qa-hook.js"
+          }
+        ]
+      }
+    ],
+    "PostSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "agent",
+            "agent": "${CLAUDE_PLUGIN_ROOT}/agents/qa-reporter-agent.md",
+            "messages": [
+              "Generate QA report for the submitted changes",
+              "Include a summary of all checks performed",
+              "Highlight any issues found that need attention"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

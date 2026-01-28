@@ -1,0 +1,9 @@
+{
+  "name": "qa-assistant",
+  "version": "1.0.0",
+  "description": "Comprehensive quality assurance and production readiness checks for code projects",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

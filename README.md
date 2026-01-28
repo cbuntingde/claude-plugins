@@ -14,7 +14,7 @@ To install plugins from within Claude Code:
 
 1. Open the `/plugins` directory in Claude Code
 2. Select **Marketplace** from the navigation
-3. Click **Add new** and provide this repository's URL
+3. Click **Add new** and enter: `https://github.com/cbuntingde/claude-plugins`
 
 Individual plugins can be installed based on your requirements.
 
@@ -39,6 +39,7 @@ cd claude-plugins
 | [MCP JSON Setup](plugins/mcp-json-setup/) | Configures and manages Model Context Protocol (MCP) servers from JSON configurations | Configuration |
 | [Optimization Suggester](plugins/optimization-suggester/) | Analyzes code for performance optimizations including caching, memoization, and async patterns | Performance |
 | [Performance Profiler](plugins/performance-profiler/) | Identifies bottlenecks and suggests optimizations through intelligent profiling and benchmarking | Performance |
+| [QA Assistant](plugins/qa-assistant/) | Comprehensive quality assurance and production readiness checks including breaking change detection, code quality analysis, and security scanning | Quality Assurance |
 | [Tribal Knowledge Extractor](plugins/tribal-knowledge-extractor/) | Mines git history for context about code evolution, patterns, and team knowledge | Analysis |
 
 ## Usage

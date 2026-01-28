@@ -73,6 +73,17 @@
       "license": "MIT"
     },
     {
+      "name": "qa-assistant",
+      "version": "1.0.0",
+      "description": "Comprehensive quality assurance and production readiness checks including breaking change detection, code quality analysis, and security scanning.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/qa-assistant",
+      "license": "MIT"
+    },
+    {
       "name": "optimization-suggester",
       "version": "1.0.0",
       "description": "Suggests code optimizations and improvements.",
