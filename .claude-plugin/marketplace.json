@@ -115,6 +115,17 @@
       },
       "source": "./plugins/tribal-knowledge-extractor",
       "license": "MIT"
+    },
+    {
+      "name": "auto-memory-plugin",
+      "version": "1.0.0",
+      "description": "Automatic memory system inspired by MemRL that hooks into Claude Code lifecycle events for seamless context retention",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/auto-memory-plugin",
+      "license": "MIT"
     }
   ]
 }

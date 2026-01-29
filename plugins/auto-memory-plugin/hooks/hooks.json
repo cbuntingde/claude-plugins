@@ -1,0 +1,112 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "agent",
+            "agent": "agents/auto-warmstart-agent.md",
+            "messages": [
+              "The user is beginning a new Claude Code session.",
+              "Retrieve the top 5 most valuable memories from this or recent sessions that are relevant to the current project context.",
+              "Prioritize memories with high utility scores (0.7+) and similar type of work (e.g., if working on TypeScript, prioritize TypeScript memories).",
+              "Present retrieved memories as context, but don't execute code from memories - just provide helpful context."
+            ]
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "agent",
+            "agent": "agents/monitoring-agent.md",
+            "messages": [
+              "User has submitted a prompt.",
+              "This is an opportunistic moment to collect context. Do NOT store anything persistent.",
+              "Only if the conversation shows highly relevant technical patterns (e.g., a novel error pattern that was successfully resolved), consider suggesting useful memories, but don't store anything."
+            ]
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Read|Bash",
+        "hooks": [
+          {
+            "type": "agent",
+            "agent": "agents/code-pattern-extractor.md",
+            "messages": [
+              "A file is being written or edited in the codebase.",
+              "Analyze the code being created or modified for patterns that could be valuable memory:",
+              "- Novel bug fixes or solutions that worked well",
+              "- Reusable design patterns or approaches",
+              "- Anti-patterns that were discovered and avoided",
+              "- Configuration patterns that saved significant time",
+              "- Performance optimizations that are broadly applicable",
+              "Provide a brief analysis of patterns found and suggest storing memories with utility estimates (0-1)."
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "agent",
+            "agent": "agents/package-pattern-extractor.md",
+            "messages": [
+              "A dependency-related command is being executed. Command: $ARGUMENTS",
+              "This often reveals interesting setup patterns, versions used, or configuration approaches.",
+              "Note any interesting package patterns or configurations discovered."
+            ]
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "agent",
+            "agent": "agents/derive-agent.md",
+            "messages": [
+              "A file operation has completed.",
+              "Reflect on the work that was done:",
+              "- Was there a challenging problem solved?",
+              "- What approach worked particularly well or poorly?",
+              "- What could be valuable to remember for future sessions?",
+              "- Estimate the utility (0-1) of remembering this knowledge.",
+              "If utility >= 0.6, a summary of what was learned should be provided."
+            ]
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ${CLAUDE_PLUGIN_ROOT}/scripts/prune_memories.py --dry-run",
+            "enabled": false
+          },
+          {
+            "type": "agent",
+            "agent": "agents/summary-agent.md",
+            "messages": [
+              "The session has completed or a major milestone was reached.",
+              "Optional: Generate a concise summary of key memories stored in this session, organized by theme or priority."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

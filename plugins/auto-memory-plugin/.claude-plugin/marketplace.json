@@ -1,0 +1,13 @@
+{
+  "name": "auto-memory-plugin",
+  "owner": {
+    "name": "Chris Bunting",
+    "url": "https://github.com/cbuntingde/"
+  },
+  "plugins": [
+    {
+      "name": "auto-memory-plugin",
+      "source": "./"
+    }
+  ]
+}

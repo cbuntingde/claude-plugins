@@ -1,0 +1,30 @@
+# Memory data - local storage only
+auto-data/
+
+# Plugin files - allow JSON in plugin directories
+*.json
+!plugin.json
+!hooks/hooks.json
+!.claude-plugin/plugin.json
+!.claude-plugin/marketplace.json
+!.claude-plugin/*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment
+.env
+.venv
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

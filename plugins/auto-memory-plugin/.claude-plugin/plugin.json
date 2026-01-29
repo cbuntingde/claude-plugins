@@ -1,0 +1,18 @@
+{
+  "name": "auto-memory-plugin",
+  "version": "1.0.0",
+  "description": "Automatic memory system inspired by MemRL that hooks into Claude Code lifecycle events for seamless context retention",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  },
+  "keywords": [
+    "memory",
+    "context",
+    "sessions",
+    "retrieval",
+    "memrl",
+    "automatic",
+    "hooks"
+  ]
+}
