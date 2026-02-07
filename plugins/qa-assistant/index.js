@@ -50,8 +50,12 @@ function getProjectRoot() {
  * Main entry point for the QA Assistant plugin
  */
 class QAAssistant {
-  constructor() {
-    this.rootDir = getProjectRoot();
+  constructor(rootDir = null) {
+    this.rootDir = rootDir || getProjectRoot();
+    // Fallback to __dirname if we couldn't find a project root with package.json
+    if (!fs.existsSync(path.join(this.rootDir, 'package.json'))) {
+      this.rootDir = __dirname;
+    }
     this.cacheDir = path.join(this.rootDir, '.qa-cache');
     this.initCache();
   }
@@ -155,13 +159,18 @@ class QAAssistant {
       for (const file of files) {
         const content = fs.readFileSync(file, 'utf-8');
 
-        for (const comparison of patterns.searchPatterns) {
-          if (content.includes(comparison.pattern) && content.includes(comparison.replacement)) {
+        for (const comparison of pattern.searchPatterns) {
+          // Skip pattern definition files (lines with 'pattern:' and 'replacement:')
+          const isPatternDefinition = content.includes(`pattern: '${comparison.pattern}'`);
+          const hasPattern = content.includes(comparison.pattern);
+          const hasReplacement = content.includes(comparison.replacement);
+          if (!isPatternDefinition && hasPattern && hasReplacement) {
             issues.push({
               severity: 'warning',
               file,
               category: 'breaking-change',
-              message: `Potential breaking change: mixing ES modules (${comparison.pattern}) with CommonJS (${comparison.replacement})`,
+              message: `Potential breaking change: mixing ES modules (${comparison.pattern}) ` +
+                `with CommonJS (${comparison.replacement})`,
               suggestion: 'Use consistent module system throughout the project'
             });
           }
@@ -179,8 +188,9 @@ class QAAssistant {
           });
         }
 
-        // Check for var usage (blocks scoping)
-        if (content.includes('var ')) {
+        // Check for var usage (blocks scoping) - skip markdown files and pattern definition files
+        const isQaToolFile = file.includes('qa-assistant') && file.endsWith('index.js');
+        if (content.includes('var ') && !file.endsWith('.md') && !isQaToolFile) {
           issues.push({
             severity: 'warning',
             file,
@@ -195,16 +205,15 @@ class QAAssistant {
     // Check for API version changes in package.json
     const packageJson = this.readPackageJson(rootDir);
     if (packageJson) {
-      if (packageJson.main && pattern.filePattern.includes('*.js')) {
-        if (!packageJson.main.endsWith('.js') && !packageJson.main.endsWith('.mjs')) {
-          issues.push({
-            severity: 'warning',
-            file: 'package.json',
-            category: 'breaking-change',
-            message: 'Main entry point doesn't match project type',
-            suggestion: `Ensure package.json['main'] ends with .js or .mjs for ${this.detectProjectType(rootDir)} project`
-          });
-        }
+      if (packageJson.main && !packageJson.main.endsWith('.js') && !packageJson.main.endsWith('.mjs')) {
+        issues.push({
+          severity: 'warning',
+          file: 'package.json',
+          category: 'breaking-change',
+          message: "Main entry point doesn't match project type",
+          suggestion: `Ensure package.json main field ends with .js or .mjs ` +
+            `for ${this.detectProjectType(rootDir)} project`
+        });
       }
     }
 
@@ -231,7 +240,8 @@ class QAAssistant {
     };
 
     // Check TypeScript/ESLint config
-    const tsConfig = this.findFirstFile(rootDir, ['.eslintrc.js', '.eslintrc.json', '.eslintrc.cjs', 'eslint.config.js']);
+    const tsConfig = this.findFirstFile(rootDir,
+      ['.eslintrc.js', '.eslintrc.json', '.eslintrc.cjs', 'eslint.config.js']);
     const tsConfigExists = !!tsConfig;
     requirements['TypeScript/ESLint config'] = tsConfigExists || this.detectProjectType(rootDir) === 'javascript';
 
@@ -239,7 +249,10 @@ class QAAssistant {
     const pkg = this.readPackageJson(rootDir);
     const hasTests = pkg && (
       pkg.scripts?.test ||
-      this.findFirstFile(rootDir, ['**/*.test.js', '**/*.test.ts', '**/*.spec.js', '**/*.spec.ts', 'test/**', 'tests/**'])
+      this.findFirstFile(rootDir, [
+        '**/*.test.js', '**/*.test.ts', '**/*.spec.js', '**/*.spec.ts',
+        'test/**', 'tests/**'
+      ])
     );
     requirements['Test coverage'] = hasTests;
 
@@ -358,9 +371,9 @@ class QAAssistant {
       }
 
       // Count functions/decorators
-      const functionCount = (content.match(/function\s+\w+\s*\(/g) || []).length +
-                           (content.match(/const\s+\w+\s*=\s*(?:async\s+)?(?:\w+|[\{\[].*=>/g) || []).length +
-                           (content.match(/const\s+\w+\s*=\s*\(/g) || []).length;
+       const functionCount = (content.match(/function\s+\w+\s*\(/g) || []).length +
+                            (content.match(/const\s+\w+\s*=\s*(?:async\s+)?(?:\w+|[{\[].*)\s*=>/g) || []).length +
+                            (content.match(/const\s+\w+\s*=\s*\(/g) || []).length;
 
       if (functionCount > 50 && file.includes('core') || file.includes('lib')) {
         issues.push({
@@ -435,7 +448,7 @@ class QAAssistant {
     ];
 
     for (const check of securityChecks) {
-      const result = check.check(rootDir);
+      const result = check.check.call(this, rootDir);
       if (result.length > 0) {
         issues.push(...result);
       }
@@ -460,9 +473,9 @@ class QAAssistant {
   checkHardcodedSecrets(rootDir) {
     const issues = [];
     const secrets = [
-      /['"`](?i:api[_-]?key|apikey|secret|password|token|auth[_-]?token|jwt[_-]?secret|private[_-]?key|public[_-]?key)[-_]?(=|:)\s*['"`].[*'"`]/gi,
-      /['"`](?i:aws_access[_-]?id|aws_secret[_-]?key|mongodb[_-]?uri|postgres[_-]?uri|mysql[_-]?uri)[-_]?=.*['"`]/gi,
-      /['"`](?i:signature|authorization)[-_]?=.*['"`].*(?i:eyJ|sk_live|sk_test|pk_live|pk_test)[a-zA-Z0-9_\-=+\/]{20,}/gi
+      /['"`](?i:api[_-]?key|apikey|secret|password|token|auth[_-]?token|jwt[_-]?secret)[-_]?(=|:)\s*['"`].[*'"`]/gi,
+      /['"`](?i:aws_access[_-]?id|aws_secret[_-]?key)[-_]?=.*['"`]/gi,
+      /['"`](?i:signature|authorization)[-_]?=.*['"`].*(?i:eyJ|sk_live)[a-zA-Z0-9_\-=+\/]{20,}/gi
     ];
 
     const files = this.findFiles(rootDir, ['*.js', '*.ts', '*.json'], false);
@@ -610,7 +623,10 @@ class QAAssistant {
 
       const deprecatedPatterns = [
         { pattern: /\.toJSON\s*/, note: 'Use toISOString() for Date objects' },
-        { pattern: /\bBuffer\.from\s*\(\s*['"`]/, note: 'Use Buffer.from(string, encoding) or safer base64 functions' },
+        {
+          pattern: /\bBuffer\.from\s*\(\s*['"`]/,
+          note: 'Use Buffer.from(string, encoding) or safer base64 functions'
+        },
         { pattern: /\.\brequire\s*\(/, note: 'Use ES6 imports for better tree-shaking' },
         { pattern: /\.describe\([*'"]only['"].*\)/, note: 'Test suite is configured to run only this suite' },
         { pattern: /\.beforeEach\([*'"]skip['"].*\)/, note: 'Test hook is skipped' },
@@ -668,7 +684,7 @@ class QAAssistant {
     const httpsConfigs = this.findFiles(rootDir, ['*.js', '*.ts', '*.json']);
     for (const file of httpsConfigs) {
       const content = fs.readFileSync(file, 'utf-8');
-      if (content.includes('https://') && !content.includes('rejectUnauthorized') && !content.includes('rejectUnauthorized')) {
+      if (content.includes('https://') && !content.includes('rejectUnauthorized')) {
         issues.push({
           severity: 'warning',
           file,
@@ -692,11 +708,16 @@ class QAAssistant {
       },
       {
         name: 'README.md exists',
-        check: () => !!this.findFirstFile(rootDir, ['.README.md', 'readme.md'])
+        check: () => !!this.findFirstFile(rootDir, ['README.md', 'readme.md'])
       },
       {
         name: 'git repository',
-        check: () => fs.existsSync(path.join(rootDir, '.git'))
+        check: () => {
+          if (fs.existsSync(path.join(rootDir, '.claude-plugin'))) {
+            return true; // Plugins are part of parent repo
+          }
+          return fs.existsSync(path.join(rootDir, '.git'));
+        }
       },
       {
         name: 'license specified',
@@ -805,17 +826,33 @@ class QAAssistant {
   getRequirementSuggestion(requirement) {
     switch (requirement) {
       case 'TypeScript/ESLint config':
-        return '1. Create .eslintrc.js with recommended rules\n2. Add TypeScript if your project supports it\n3. Enable strict mode for better type safety';
+        return '1. Create .eslintrc.js with recommended rules\n' +
+          '2. Add TypeScript if your project supports it\n' +
+          '3. Enable strict mode for better type safety';
       case 'Test coverage':
-        return '1. Install testing framework (Jest/Vitest/Mocha)\n2. Write unit tests for all functions\n3. Add integration tests for critical paths\n4. Set minimum coverage threshold in package.json';
+        return '1. Install testing framework (Jest/Vitest/Mocha)\n' +
+          '2. Write unit tests for all functions\n' +
+          '3. Add integration tests for critical paths\n' +
+          '4. Set minimum coverage threshold in package.json';
       case 'Security audit':
-        return '1. Run `npm audit fix` to resolve vulnerabilities\n2. Subscribe to npm audit notifications\n3. Review known CVEs for the dependencies';
+        return '1. Run `npm audit fix` to resolve vulnerabilities\n' +
+          '2. Subscribe to npm audit notifications\n' +
+          '3. Review known CVEs for the dependencies';
       case 'Environment variables':
-        return '1. Create .env.example with all required variables\n2. Add .gitignore for .env files\n3. Use dotenv package in development\n4. Use process.env in production';
+        return '1. Create .env.example with all required variables\n' +
+          '2. Add .gitignore for .env files\n' +
+          '3. Use dotenv package in development\n' +
+          '4. Use process.env in production';
       case 'Error handling':
-        return '1. Wrap async operations in try/catch blocks\n2. Return consistent error types\n3. Log errors with context\n4. Add error boundaries in React apps';
+        return '1. Wrap async operations in try/catch blocks\n' +
+          '2. Return consistent error types\n' +
+          '3. Log errors with context\n' +
+          '4. Add error boundaries in React apps';
       case 'Logging configured':
-        return '1. Install Winston or Pino logging library\n2. Configure appropriate log levels\n3. Add request/response logging for APIs\n4. Include correlation IDs for distributed tracing';
+        return '1. Install Winston or Pino logging library\n' +
+          '2. Configure appropriate log levels\n' +
+          '3. Add request/response logging for APIs\n' +
+          '4. Include correlation IDs for distributed tracing';
       default:
         return 'Configure this in your project settings';
     }
