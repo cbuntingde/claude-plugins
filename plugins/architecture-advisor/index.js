@@ -5,8 +5,10 @@
  */
 
 const path = require('path');
+const { fileURLToPath } = require('url');
 
-// Use __dirname directly for CommonJS module
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 module.exports = {
   name: 'architecture-advisor',
   version: '1.0.0',

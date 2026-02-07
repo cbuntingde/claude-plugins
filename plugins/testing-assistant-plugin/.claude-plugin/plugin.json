@@ -1,0 +1,14 @@
+{
+  "name": "testing-assistant-plugin",
+  "version": "1.0.0",
+  "description": "Plugin for finding edge cases, generating tests, and improving test coverage",
+  "author": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  },
+  "commands": [
+    "./commands/find-edge-cases.md",
+    "./commands/generate-tests.md",
+    "./commands/improve-tests.md"
+  ]
+}

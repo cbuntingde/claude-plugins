@@ -1,0 +1,9 @@
+{
+  "name": "multi-agent-orchestrator",
+  "version": "1.0.0",
+  "description": "Orchestrates multiple parallel AI agents for comprehensive code analysis, review, and automated fixes",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

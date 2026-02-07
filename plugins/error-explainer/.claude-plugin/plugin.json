@@ -1,0 +1,9 @@
+{
+  "name": "error-explainer",
+  "version": "1.0.0",
+  "description": "Provides context and solutions for cryptic error messages",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

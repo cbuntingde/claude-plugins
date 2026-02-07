@@ -1,0 +1,49 @@
+# Cross-Repository Knowledge Navigator - Python Dependencies
+
+# Core dependencies
+anthropic>=0.18.0
+openai>=1.0.0
+python-dotenv>=1.0.0
+
+# Vector embeddings and search
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.0  # or faiss-gpu for GPU acceleration
+
+# Git integration
+gitpython>=3.1.40
+
+# HTTP clients
+httpx>=0.25.0
+aiohttp>=3.9.0
+
+# Data processing
+pandas>=2.1.0
+numpy>=1.24.0
+
+# Text processing
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+markdown>=3.5.0
+
+# Configuration
+pydantic>=2.5.0
+pyyaml>=6.0.0
+
+# Logging and monitoring
+structlog>=23.2.0
+
+# Utilities
+tenacity>=8.2.0
+tqdm>=4.66.0
+
+# MCP Framework
+mcp>=0.1.0
+
+# Slack integration (optional)
+slack-sdk>=3.23.0
+
+# Jira integration (optional)
+jira>=3.5.0
+
+# Confluence integration (optional)
+atlassian-python-api>=3.40.0

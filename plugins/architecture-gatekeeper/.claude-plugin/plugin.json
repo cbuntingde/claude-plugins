@@ -1,0 +1,30 @@
+{
+  "name": "architecture-gatekeeper",
+  "version": "1.0.0",
+  "description": "Architecture Gatekeeper - Prevent commits violating architecture patterns or creating circular dependencies",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  },
+  "commands": [
+    "./commands/check-architecture.md",
+    "./commands/check-circular.md",
+    "./commands/check-patterns.md",
+    "./commands/validate-commit.md",
+    "./commands/configure-gates.md",
+    "./commands/show-violations.md"
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-architecture.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

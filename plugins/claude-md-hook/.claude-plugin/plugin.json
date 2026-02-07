@@ -1,0 +1,9 @@
+{
+  "name": "claude-md-hook",
+  "version": "1.0.0",
+  "description": "Automatically includes CLAUDE.md context with every user prompt",
+  "author": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  }
+}

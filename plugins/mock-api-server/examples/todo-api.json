@@ -1,0 +1,99 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/todos",
+      "method": "GET",
+      "response": {
+        "todos": [
+          {
+            "id": 1,
+            "title": "Learn Mock APIs",
+            "completed": false,
+            "createdAt": "2025-01-15T10:00:00Z"
+          },
+          {
+            "id": 2,
+            "title": "Build awesome app",
+            "completed": true,
+            "createdAt": "2025-01-15T11:30:00Z"
+          },
+          {
+            "id": 3,
+            "title": "Deploy to production",
+            "completed": false,
+            "createdAt": "2025-01-16T09:00:00Z"
+          }
+        ],
+        "total": 3,
+        "page": 1
+      },
+      "status": 200,
+      "delay": 100
+    },
+    {
+      "path": "/api/todos/:id",
+      "method": "GET",
+      "response": {
+        "id": "{{params.id}}",
+        "title": "Todo {{params.id}}",
+        "completed": false,
+        "createdAt": "2025-01-15T10:00:00Z"
+      },
+      "status": 200,
+      "delay": 50
+    },
+    {
+      "path": "/api/todos",
+      "method": "POST",
+      "response": {
+        "id": 4,
+        "title": "{{body.title}}",
+        "completed": false,
+        "createdAt": "2025-01-17T14:30:00Z",
+        "created": true
+      },
+      "status": 201,
+      "delay": 150
+    },
+    {
+      "path": "/api/todos/:id",
+      "method": "PUT",
+      "response": {
+        "id": "{{params.id}}",
+        "title": "{{body.title}}",
+        "completed": "{{body.completed}}",
+        "updatedAt": "2025-01-17T14:35:00Z",
+        "updated": true
+      },
+      "status": 200,
+      "delay": 100
+    },
+    {
+      "path": "/api/todos/:id",
+      "method": "DELETE",
+      "response": {
+        "id": "{{params.id}}",
+        "deleted": true
+      },
+      "status": 200,
+      "delay": 75
+    },
+    {
+      "path": "/api/todos/search",
+      "method": "GET",
+      "response": {
+        "query": "{{query.q}}",
+        "todos": [
+          {
+            "id": 1,
+            "title": "{{query.q}} - Task 1",
+            "completed": false
+          }
+        ],
+        "total": 1
+      },
+      "status": 200,
+      "delay": 120
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "review-squad-coordinator",
+  "version": "1.0.0",
+  "description": "Auto-assign code reviewers based on code ownership patterns and expertise",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

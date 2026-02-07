@@ -4,12 +4,7 @@
  * Compares multiple performance profile runs
  */
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync } from 'fs';
-import { join, dirname, basename } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { existsSync, readFileSync } from 'fs';
 
 const args = process.argv.slice(2);
 
@@ -21,9 +16,7 @@ function parseArgs() {
     baseline: null,
     current: null,
     output: null,
-    format: 'text',
-    trend: null,
-    threshold: 10
+    format: 'text'
   };
 
   let i = 0;
@@ -42,19 +35,6 @@ function parseArgs() {
     } else if (arg === '--format' && args[i + 1]) {
       result.format = args[i + 1];
       i += 2;
-    } else if (arg === '--trend' && args[i + 1]) {
-      result.trend = args[i + 1];
-      i += 2;
-    } else if (arg === '--threshold' && args[i + 1]) {
-      result.threshold = parseFloat(args[i + 1]);
-      i += 2;
-    } else if (!arg.startsWith('--')) {
-      if (!result.baseline) {
-        result.baseline = arg;
-      } else if (!result.current) {
-        result.current = arg;
-      }
-      i++;
     } else {
       i++;
     }
@@ -89,7 +69,7 @@ function loadProfile(filePath) {
 /**
  * Compare two performance profiles
  */
-function compareProfiles(baseline, current, threshold) {
+function compareProfiles(baseline, current) {
   if (baseline.error || current.error) {
     return {
       error: baseline.error || current.error,
@@ -104,10 +84,9 @@ function compareProfiles(baseline, current, threshold) {
 
   const comparison = {
     timestamp: new Date().toISOString(),
-    baseline: baseline.file || baseline.raw ? 'baseline' : 'unknown',
-    current: current.file || current.raw ? 'current' : 'unknown',
-    metrics: {},
-    threshold
+    baseline: baseline.file,
+    current: current.file,
+    metrics: {}
   };
 
   // Compare each metric
@@ -124,7 +103,7 @@ function compareProfiles(baseline, current, threshold) {
         current: currentValue,
         diff,
         percentChange,
-        status: getStatus(percentChange, threshold)
+        status: getStatus(percentChange)
       };
     } else {
       comparison.metrics[key] = {
@@ -169,9 +148,9 @@ function extractMetrics(profile) {
 /**
  * Determine status based on change percentage
  */
-function getStatus(percentChange, threshold) {
-  if (percentChange > threshold) return 'worse';
-  if (percentChange < -threshold) return 'better';
+function getStatus(percentChange) {
+  if (percentChange > 10) return 'worse';
+  if (percentChange < -10) return 'better';
   return 'stable';
 }
 
@@ -234,53 +213,26 @@ function generateReport(comparison, options) {
 }
 
 /**
- * Write report to file or stdout
- */
-function writeReport(report, outputPath) {
-  if (outputPath) {
-    try {
-      const dir = dirname(outputPath);
-      if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true });
-      }
-      writeFileSync(outputPath, report, 'utf-8');
-      return { success: true, path: outputPath };
-    } catch (error) {
-      return { success: false, error: error.message };
-    }
-  }
-  process.stdout.write(report);
-  return { success: true, path: 'stdout' };
-}
-
-/**
  * Main entry point
  */
 function main() {
   const options = parseArgs();
 
-  if (!options.baseline || !options.current) {
-    process.stderr.write('Error: Both baseline and current profile files are required\n');
-    process.stderr.write('Usage: compare-perf <baseline> <current> [--output <file>] [--format <text|json>] [--threshold <percent>]\n');
-    process.exit(1);
-  }
+  console.log('Performance Comparison');
+  console.log(`Baseline: ${options.baseline}`);
+  console.log(`Current: ${options.current}`);
+  console.log('');
 
   const baseline = loadProfile(options.baseline);
   const current = loadProfile(options.current);
 
-  const comparison = compareProfiles(baseline, current, options.threshold);
+  const comparison = compareProfiles(baseline, current);
   const report = generateReport(comparison, options);
 
-  // Write report
-  const writeResult = writeReport(report, options.output);
-
-  if (!writeResult.success) {
-    process.stderr.write(`Error writing report: ${writeResult.error}\n`);
-    process.exit(1);
-  }
-
   if (options.output) {
-    process.stderr.write(`Report saved to: ${writeResult.path}\n`);
+    console.log(`Report would be saved to: ${options.output}`);
+  } else {
+    console.log(report);
   }
 }
 

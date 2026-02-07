@@ -1,0 +1,107 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/users",
+      "method": "GET",
+      "response": {
+        "users": [
+          {
+            "id": 1,
+            "name": "Alice Johnson",
+            "email": "alice@example.com",
+            "role": "admin",
+            "avatar": "https://i.pravatar.cc/150?img=1"
+          },
+          {
+            "id": 2,
+            "name": "Bob Smith",
+            "email": "bob@example.com",
+            "role": "user",
+            "avatar": "https://i.pravatar.cc/150?img=2"
+          },
+          {
+            "id": 3,
+            "name": "Carol Williams",
+            "email": "carol@example.com",
+            "role": "user",
+            "avatar": "https://i.pravatar.cc/150?img=3"
+          }
+        ],
+        "total": 3,
+        "page": 1,
+        "pageSize": 10
+      },
+      "status": 200,
+      "delay": 100
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "GET",
+      "response": {
+        "id": "{{params.id}}",
+        "name": "User {{params.id}}",
+        "email": "user{{params.id}}@example.com",
+        "role": "user",
+        "avatar": "https://i.pravatar.cc/150?img={{params.id}}",
+        "bio": "Software developer and tech enthusiast",
+        "location": "San Francisco, CA",
+        "joined": "2024-01-15T00:00:00Z"
+      },
+      "status": 200,
+      "delay": 50
+    },
+    {
+      "path": "/api/users",
+      "method": "POST",
+      "response": {
+        "id": 4,
+        "name": "{{body.name}}",
+        "email": "{{body.email}}",
+        "role": "user",
+        "avatar": "https://i.pravatar.cc/150?img=4",
+        "created": true,
+        "joined": "2025-01-17T00:00:00Z"
+      },
+      "status": 201,
+      "delay": 200
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "PUT",
+      "response": {
+        "id": "{{params.id}}",
+        "name": "{{body.name}}",
+        "email": "{{body.email}}",
+        "role": "{{body.role}}",
+        "updated": true,
+        "updatedAt": "2025-01-17T14:30:00Z"
+      },
+      "status": 200,
+      "delay": 150
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "DELETE",
+      "response": {
+        "id": "{{params.id}}",
+        "deleted": true
+      },
+      "status": 200,
+      "delay": 100
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "GET",
+      "response": {
+        "error": "User not found",
+        "code": "USER_NOT_FOUND"
+      },
+      "status": 404,
+      "condition": {
+        "field": "params.id",
+        "operator": ">",
+        "value": 100
+      }
+    }
+  ]
+}

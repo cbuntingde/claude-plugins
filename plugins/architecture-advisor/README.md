@@ -157,39 +157,31 @@ The plugin adapts recommendations to:
 
 ## Configuration
 
-### Configuration File
+### Environment Variables
 
-You can customize the analyzer behavior using a JSON configuration file:
+No environment variables required for this plugin.
+
+### Plugin Settings
 
 ```json
 {
-  "maxFileSize": 1048576,
-  "allowedExtensions": [".ts", ".js", ".py", ".java", ".go", ".rs"],
-  "excludedPatterns": ["**/node_modules/**", "**/.git/**", "**/dist/**", "**/build/**"],
-  "antiPatternRules": {
-    "maxClassLines": 300,
-    "maxMethodLines": 50,
-    "maxDepth": 4,
-    "maxInheritanceDepth": 3
+  "plugins": {
+    "architecture-advisor": {
+      "includePatterns": ["**/*.ts", "**/*.js", "**/*.py", "**/*.java"],
+      "excludePatterns": ["**/node_modules/**", "**/dist/**", "**/*.min.js"],
+      "defaultFocus": "patterns",
+      "maxFiles": 1000
+    }
   }
 }
 ```
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| `maxFileSize` | number | `1048576` | Maximum file size in bytes (1MB) |
-| `allowedExtensions` | string[] | `['.ts', '.js', '.py', '.java', '.go', '.rs']` | File extensions to analyze |
-| `excludedPatterns` | string[] | See default | Glob patterns to exclude |
-| `antiPatternRules` | object | See below | Threshold values for anti-pattern detection |
-
-#### Anti-Pattern Rules
-
-| Rule | Default | Description |
-|------|---------|-------------|
-| `maxClassLines` | `300` | Maximum lines in a class before flagging |
-| `maxMethodLines` | `50` | Maximum lines in a method before flagging |
-| `maxDepth` | `4` | Maximum nesting depth before flagging |
-| `maxInheritanceDepth` | `3` | Maximum inheritance depth before flagging |
+| `includePatterns` | string[] | See default | File patterns to include in review |
+| `excludePatterns` | string[] | See default | File patterns to exclude |
+| `defaultFocus` | string | `"patterns"` | Default focus area (patterns, solid, anti-patterns) |
+| `maxFiles` | number | `1000` | Maximum files to analyze in one review |
 
 ### Command Options
 
@@ -197,10 +189,9 @@ You can customize the analyzer behavior using a JSON configuration file:
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `path` | Directory or file to review | Current directory |
-| `--focus` | Focus area (all, patterns, solid, anti-patterns) | `all` |
-| `--depth` | Detail level (standard, detailed) | `standard` |
-| `--config` | Path to configuration file | Built-in defaults |
+| `--path` | Directory or file to review | Current directory |
+| `--focus` | Focus area (patterns, solid, anti-patterns, all) | `all` |
+| `--depth` | Detail level (brief, standard, detailed) | `standard` |
 
 #### `/pattern-suggest` Options
 
@@ -208,34 +199,6 @@ You can customize the analyzer behavior using a JSON configuration file:
 |--------|-------------|---------|
 | `--language` | Programming language for examples | `typescript` |
 | `--complexity` | Complexity level (simple, moderate, complex) | `moderate` |
-
-### Environment Variables
-
-No environment variables required for this plugin.
-
-## Security
-
-This plugin handles file system operations and implements security best practices:
-
-### Path Traversal Protection
-- All file paths are validated and sanitized before use
-- Paths are resolved and checked to ensure they remain within the specified base directory
-- Null bytes, URLs, and Windows device paths are rejected
-
-### Input Validation
-- All user inputs are validated against strict allow-lists
-- Problem descriptions are limited to 10,000 characters to prevent DoS
-- Language and complexity options are validated against allowed values
-
-### Safe File Operations
-- Maximum file size limits prevent memory exhaustion
-- Excluded patterns prevent analysis of sensitive directories (node_modules, .git, etc.)
-- File access errors are handled gracefully with informative messages
-
-### Logging
-- Structured JSON logging with request IDs for traceability
-- Sensitive data is never logged
-- Log levels: DEBUG, INFO, WARN, ERROR, FATAL
 
 ## Contributing
 
@@ -253,4 +216,4 @@ See CHANGELOG.md for version history and changes.
 
 **Plugin Author**: cbuntingde
 **Version**: 1.0.0
-**Homepage**: https://github.com/cbuntingde/claude-plugins/tree/main/plugins/architecture-advisor
+**Homepage**: https://github.com/cbuntingde/claude-plugins-dev/tree/main/plugins/architecture-advisor

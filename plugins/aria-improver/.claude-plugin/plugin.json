@@ -1,0 +1,9 @@
+{
+  "name": "aria-improver",
+  "version": "1.0.0",
+  "description": "Suggests ARIA labels and semantic HTML improvements for better accessibility and SEO",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

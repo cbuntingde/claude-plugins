@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "agent",
+            "description": "Check code complexity after edits",
+            "agent": "complexity-analyzer",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Analyze the code that was just modified for complexity. If any functions have cyclomatic complexity > 15 or cognitive complexity > 15, flag them and suggest refactoring. Focus on the file(s) that were just edited."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "description": "Set up complexity checking preferences",
+            "agent": "complexity-analyzer",
+            "messages": [
+              {
+                "role": "user",
+                "content": "Check if the user wants to enable automatic complexity checking for this session. If CLAUDE_COMPLEXITY_AUTO_CHECK is set to true, remind them that complexity analysis will run automatically after code edits."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "claude-crud-generator",
+  "version": "1.0.0",
+  "description": "Generate CRUD operations from database schemas for various frameworks and languages",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "api-doc-generator",
+  "version": "1.0.0",
+  "description": "Generate API documentation from source code and OpenAPI specifications",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionEnd": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Suggest running agent swarm at session end",
+            "prompt": "The session is ending. Would you like to run a comprehensive agent swarm analysis on the changes made?\n\nUse: /agent-swarm\n\nThis will launch observer, security, code-standards, ai-slop, and qa agents in parallel to review all changes."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "(Write|Edit)",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Track code changes for potential analysis",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/track-change.sh",
+            "runInBackground": true
+          }
+        ]
+      }
+    ]
+  }
+}

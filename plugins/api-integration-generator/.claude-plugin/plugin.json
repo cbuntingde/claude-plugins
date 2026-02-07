@@ -1,0 +1,9 @@
+{
+  "name": "api-integration-generator",
+  "version": "1.0.0",
+  "description": "Generate fully-typed, error-handled API client code from OpenAPI specs or documentation. Supports TypeScript, Python, and Go with automatic updates when APIs change.",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

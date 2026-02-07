@@ -1,0 +1,101 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/success",
+      "method": "GET",
+      "response": {
+        "message": "Success!",
+        "data": { "id": 1, "value": "test" }
+      },
+      "status": 200,
+      "delay": 100
+    },
+    {
+      "path": "/api/bad-request",
+      "method": "POST",
+      "response": {
+        "error": "Bad request",
+        "code": "BAD_REQUEST",
+        "details": {
+          "email": ["Invalid email format"],
+          "name": ["Name is required"]
+        }
+      },
+      "status": 400,
+      "delay": 50
+    },
+    {
+      "path": "/api/unauthorized",
+      "method": "GET",
+      "response": {
+        "error": "Unauthorized",
+        "code": "UNAUTHORIZED",
+        "message": "Authentication required"
+      },
+      "status": 401,
+      "delay": 100
+    },
+    {
+      "path": "/api/forbidden",
+      "method": "GET",
+      "response": {
+        "error": "Forbidden",
+        "code": "FORBIDDEN",
+        "message": "You don't have permission to access this resource"
+      },
+      "status": 403,
+      "delay": 100
+    },
+    {
+      "path": "/api/not-found",
+      "method": "GET",
+      "response": {
+        "error": "Resource not found",
+        "code": "NOT_FOUND"
+      },
+      "status": 404,
+      "delay": 75
+    },
+    {
+      "path": "/api/server-error",
+      "method": "GET",
+      "response": {
+        "error": "Internal server error",
+        "code": "INTERNAL_ERROR",
+        "message": "Something went wrong"
+      },
+      "status": 500,
+      "delay": 500
+    },
+    {
+      "path": "/api/service-unavailable",
+      "method": "GET",
+      "response": {
+        "error": "Service unavailable",
+        "code": "SERVICE_UNAVAILABLE",
+        "message": "Service is temporarily down"
+      },
+      "status": 503,
+      "delay": 2000
+    },
+    {
+      "path": "/api/slow",
+      "method": "GET",
+      "response": {
+        "message": "This endpoint is very slow",
+        "data": { "value": "test" }
+      },
+      "status": 200,
+      "delay": 3000
+    },
+    {
+      "path": "/api/timeout",
+      "method": "GET",
+      "response": {
+        "message": "This will timeout"
+      },
+      "status": 200,
+      "delay": 60000
+    }
+  ]
+}

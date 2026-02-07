@@ -1,0 +1,146 @@
+// Example Prisma Schema for E-commerce Database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  firstName    String?   @map("first_name")
+  lastName     String?   @map("last_name")
+  phone        String?
+  isActive     Boolean   @default(true) @map("is_active")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  orders      Order[]
+  addresses   Address[]
+  reviews     Review[]
+
+  @@map("users")
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  parentId    Int?      @map("parent_id")
+  parent      Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Category[] @relation("CategoryHierarchy")
+  products    Product[]
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("categories")
+}
+
+model Product {
+  id              Int       @id @default(autoincrement())
+  name            String
+  description     String?
+  sku             String    @unique
+  price           Decimal   @db.Decimal(10, 2)
+  compareAtPrice  Decimal?  @map("compare_at_price") @db.Decimal(10, 2)
+  costPrice       Decimal?  @map("cost_price") @db.Decimal(10, 2)
+  quantityInStock Int       @default(0) @map("quantity_in_stock")
+  categoryId      Int?      @map("category_id")
+  category        Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  isActive        Boolean   @default(true) @map("is_active")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  orderItems OrderItem[]
+  reviews    Review[]
+
+  @@map("products")
+}
+
+model Order {
+  id           Int       @id @default(autoincrement())
+  userId       Int       @map("user_id")
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderDate    DateTime  @default(now()) @map("order_date")
+  status       String    @default("pending")
+  subtotal     Decimal   @db.Decimal(10, 2)
+  taxAmount    Decimal   @default(0) @map("tax_amount") @db.Decimal(10, 2)
+  shippingAmount Decimal @default(0) @map("shipping_amount") @db.Decimal(10, 2)
+  totalAmount  Decimal   @map("total_amount") @db.Decimal(10, 2)
+  notes        String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  items    OrderItem[]
+  payments Payment[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  orderId    Int      @map("order_id")
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId  Int      @map("product_id")
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity   Int      @default(1)
+  unitPrice  Decimal  @map("unit_price") @db.Decimal(10, 2)
+  totalPrice Decimal  @map("total_price") @db.Decimal(10, 2)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("order_items")
+}
+
+model Address {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @map("user_id")
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  addressType    String   @map("address_type")
+  streetAddress  String   @map("street_address")
+  apartment      String?
+  city           String
+  state          String?
+  postalCode     String   @map("postal_code")
+  country        String
+  isDefault      Boolean  @default(false) @map("is_default")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("addresses")
+}
+
+model Payment {
+  id             Int      @id @default(autoincrement())
+  orderId        Int      @map("order_id")
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  paymentMethod  String   @map("payment_method")
+  amount         Decimal  @db.Decimal(10, 2)
+  status         String   @default("pending")
+  transactionId  String?  @map("transaction_id")
+  paymentDate    DateTime @default(now()) @map("payment_date")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("payments")
+}
+
+model Review {
+  id                 Int      @id @default(autoincrement())
+  productId          Int      @map("product_id")
+  product            Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId             Int      @map("user_id")
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating             Int
+  title              String?
+  comment            String?
+  isVerifiedPurchase Boolean  @default(false) @map("is_verified_purchase")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@unique([productId, userId], name: "unique_review")
+  @@map("reviews")
+}

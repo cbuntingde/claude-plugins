@@ -1,0 +1,9 @@
+{
+  "name": "bug-catcher-plugin",
+  "version": "1.0.0",
+  "description": "Automatically captures tool failures and provides a command to display collected bugs in a formatted table",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

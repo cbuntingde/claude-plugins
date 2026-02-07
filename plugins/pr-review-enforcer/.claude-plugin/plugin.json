@@ -1,0 +1,9 @@
+{
+  "name": "pr-review-enforcer",
+  "version": "1.0.0",
+  "description": "Comprehensive PR and code review enforcement plugin ensuring PR descriptions, tests, and documentation exist before merge",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

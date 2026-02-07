@@ -4,12 +4,8 @@
  * Analyzes code execution performance and identifies bottlenecks
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { join, extname, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { readFileSync, existsSync } from 'fs';
+import { join, extname } from 'path';
 
 const args = process.argv.slice(2);
 
@@ -188,30 +184,15 @@ function compareWithBaseline(results, baselinePath) {
 }
 
 /**
- * Write report to file or stdout
- */
-function writeReport(report, outputPath) {
-  if (outputPath) {
-    try {
-      const dir = dirname(outputPath);
-      if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true });
-      }
-      writeFileSync(outputPath, report, 'utf-8');
-      return { success: true, path: outputPath };
-    } catch (error) {
-      return { success: false, error: error.message };
-    }
-  }
-  process.stdout.write(report);
-  return { success: true, path: 'stdout' };
-}
-
-/**
  * Main entry point
  */
 function main() {
   const options = parseArgs();
+
+  console.log(`Analyzing: ${options.target}`);
+  console.log(`Format: ${options.format}`);
+  console.log(`Deep analysis: ${options.deep}`);
+  console.log('');
 
   // For now, analyze the target file/directory
   const results = [analyzeFile(options.target)];
@@ -222,16 +203,11 @@ function main() {
   // Generate report
   const report = generateReport(comparison.results || results, options);
 
-  // Write report
-  const writeResult = writeReport(report, options.output);
-
-  if (!writeResult.success) {
-    process.stderr.write(`Error writing report: ${writeResult.error}\n`);
-    process.exit(1);
-  }
-
   if (options.output) {
-    process.stderr.write(`Report saved to: ${writeResult.path}\n`);
+    // Output will be handled by the caller
+    console.log(`Report would be saved to: ${options.output}`);
+  } else {
+    console.log(report);
   }
 }
 

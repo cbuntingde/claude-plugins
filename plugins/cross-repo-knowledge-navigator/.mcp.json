@@ -1,0 +1,64 @@
+{
+  "mcpServers": {
+    "github-repo-scanner": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/servers/github-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "GITHUB_ORG": "${GITHUB_ORG:-company}",
+        "REPO_PATTERN": "${REPO_PATTERN:-*}"
+      }
+    },
+    "slack-search": {
+      "command": "python",
+      "args": [
+        "-m",
+        "slack_mcp_server"
+      ],
+      "cwd": "${CLAUDE_PLUGIN_ROOT}/servers/slack-mcp-server",
+      "env": {
+        "SLACK_TOKEN": "${SLACK_TOKEN}",
+        "SLACK_CHANNELS": "${SLACK_CHANNELS:-#backend,#frontend,#platform}"
+      }
+    },
+    "jira-integration": {
+      "command": "python",
+      "args": [
+        "-m",
+        "jira_mcp_server"
+      ],
+      "cwd": "${CLAUDE_PLUGIN_ROOT}/servers/jira-mcp-server",
+      "env": {
+        "JIRA_URL": "${JIRA_URL}",
+        "JIRA_EMAIL": "${JIRA_EMAIL}",
+        "JIRA_TOKEN": "${JIRA_TOKEN}",
+        "JIRA_PROJECTS": "${JIRA_PROJECTS:-BACKEND,FRONTEND,PLATFORM}"
+      }
+    },
+    "confluence-search": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/servers/confluence-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "CONFLUENCE_URL": "${CONFLUENCE_URL}",
+        "CONFLUENCE_TOKEN": "${CONFLUENCE_TOKEN}",
+        "CONFLUENCE_SPACES": "${CONFLUENCE_SPACES:-TECH,ARCH,RUNBOOKS}"
+      }
+    },
+    "knowledge-indexer": {
+      "command": "python",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/scripts/knowledge_indexer.py"
+      ],
+      "env": {
+        "INDEX_PATH": "${CLAUDE_PLUGIN_ROOT}/data/knowledge_index",
+        "EMBEDDING_MODEL": "text-embedding-3-small",
+        "CHUNK_SIZE": "1000",
+        "CHUNK_OVERLAP": "200"
+      }
+    }
+  }
+}

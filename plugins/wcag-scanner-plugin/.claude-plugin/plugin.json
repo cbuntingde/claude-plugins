@@ -1,0 +1,9 @@
+{
+  "name": "wcag-scanner",
+  "version": "1.0.0",
+  "description": "Scan for WCAG 2.2 compliance issues in HTML, CSS, JavaScript, and framework components",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "tech-debt-tracker",
+  "version": "1.0.0",
+  "description": "Technical debt tracker that identifies and prioritizes areas needing refactoring",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

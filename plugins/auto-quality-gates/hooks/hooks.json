@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/null",
+            "description": "Auto-fix linting issues after code changes"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "The user is about to run a bash command. If this command could potentially be destructive (like rm -rf, git clean, etc.), warn them about safety.",
+            "description": "Safety check before destructive commands"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/help-commands",
+            "description": "Display welcome message with testing hints"
+          }
+        ]
+      }
+    ]
+  }
+}

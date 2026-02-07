@@ -1,0 +1,9 @@
+{
+  "name": "ticket-sync-hook",
+  "version": "1.0.0",
+  "description": "Automatically update Jira/Linear tickets based on git commit activity",
+  "author": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  }
+}

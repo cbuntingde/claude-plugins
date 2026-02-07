@@ -1,0 +1,48 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-index-updates.sh",
+            "description": "Check for knowledge index updates on session start"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Analyze the file just read for technical decisions, patterns, or practices that should be indexed. If you find architecture decisions, technology choices, or team practices, note them for potential knowledge indexing.",
+            "description": "Extract knowledge from read files"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/queue-indexing.sh",
+            "description": "Queue modified files for knowledge indexing"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If the user is asking about company-wide knowledge, technical decisions, or team practices, consider using the knowledge search capabilities to provide comprehensive answers from across all repos and knowledge bases.",
+            "description": "Suggest knowledge search for relevant queries"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "claude-code-api-doc-plugin",
+  "version": "1.0.0",
+  "description": "Generate static API documentation sites, interactive explorers, code examples, SDK docs, and changelogs",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

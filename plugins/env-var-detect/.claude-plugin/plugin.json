@@ -1,0 +1,9 @@
+{
+  "name": "env-var-detect",
+  "version": "1.0.0",
+  "description": "Automatically detect missing environment variables in your codebase",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

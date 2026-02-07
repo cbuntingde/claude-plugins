@@ -1,0 +1,9 @@
+{
+  "name": "intelligent-refactoring-assistant",
+  "version": "1.0.0",
+  "description": "Safe, context-aware refactoring tools for modernizing legacy code, extracting duplicated logic, and applying design patterns with confidence",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

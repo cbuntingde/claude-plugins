@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "memory-leak-detector",
+      "command": "node",
+      "args": ["C:/chris-dev/memory-leak-detector-plugin/src/index.js"]
+    }
+  ]
+}

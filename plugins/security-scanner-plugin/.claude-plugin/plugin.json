@@ -1,0 +1,9 @@
+{
+  "name": "security-scanner-plugin",
+  "version": "1.0.0",
+  "description": "Security scanner that detects common vulnerabilities and suggests fixes for OWASP Top 10, security misconfigurations, and code-level security issues",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

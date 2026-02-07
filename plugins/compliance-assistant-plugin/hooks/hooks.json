@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Quick compliance check on file writes",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/quick-check.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Compliance check on write failures",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/pii-check.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Quick compliance check on session start",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/quick-check.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "compliance|gdpr|hipaa|soc2|pii|privacy|personal data|health information|phi|regulation",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Compliance-focused response for compliance queries",
+            "prompt": "You are a Compliance and Security Expert. The user is asking about compliance topics.\n\nProvide detailed compliance guidance focusing on:\n- GDPR (General Data Protection Regulation) requirements\n- HIPAA (Health Insurance Portability and Accountability Act) Security Rule\n- SOC2 (Service Organization Control 2) Trust Services Criteria\n- PII (Personally Identifiable Information) handling and protection\n- Data protection and privacy best practices\n- Regulatory requirements and compliance frameworks\n- Risk assessment and remediation strategies\n\nBe thorough and include specific regulatory references, code examples, and actionable recommendations."
+          }
+        ]
+      }
+    ]
+  }
+}

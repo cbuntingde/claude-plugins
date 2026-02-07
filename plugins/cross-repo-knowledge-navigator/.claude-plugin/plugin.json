@@ -1,0 +1,9 @@
+{
+  "name": "cross-repo-knowledge-navigator",
+  "version": "1.0.0",
+  "description": "AI-powered knowledge navigator that searches across multiple repositories, Slack threads, Jira tickets, and Confluence docs to answer company-wide questions",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

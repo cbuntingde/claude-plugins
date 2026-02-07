@@ -1,0 +1,9 @@
+{
+  "name": "auto-quality-gates",
+  "version": "1.0.0",
+  "description": "Automated testing and quality gates configuration framework for CI/CD pipelines",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

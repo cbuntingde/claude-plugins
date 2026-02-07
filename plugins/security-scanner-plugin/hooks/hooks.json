@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Run security scan on file writes",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/security-scan.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Check for security issues on write failures",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/vulnerability-check.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Run quick security check on session start",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/quick-scan.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "security|vulnerability|scan|audit|secure|exploit|CVE|OWASP",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Security-focused response for security queries",
+            "prompt": "You are a Security Expert. The user is asking about security topics.\n\nProvide detailed security guidance focusing on:\n- OWASP Top 10 vulnerabilities and mitigations\n- Secure coding practices\n- Authentication and authorization best practices\n- Input validation and sanitization\n- Cryptography recommendations\n- Common attack patterns and defenses\n\nBe thorough and include specific code examples when relevant."
+          }
+        ]
+      }
+    ]
+  }
+}

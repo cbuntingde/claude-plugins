@@ -1,0 +1,9 @@
+{
+  "name": "migration-generator",
+  "version": "1.0.0",
+  "description": "Generate database migrations from schema descriptions across multiple frameworks",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

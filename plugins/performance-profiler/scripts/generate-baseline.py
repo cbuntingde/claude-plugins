@@ -31,7 +31,7 @@ def generate_baseline(name=None, output_file=None):
     elif project_type == "go":
         profile_data = profile_go()
     else:
-        print(f"Unsupported project type: {project_type}")
+        print(f"⚠️  Unsupported project type: {project_type}")
         return None
 
     # Create baseline data structure
@@ -56,7 +56,7 @@ def generate_baseline(name=None, output_file=None):
     with open(output_file, 'w') as f:
         json.dump(baseline, f, indent=2)
 
-    print(f"Performance baseline saved to: {output_file}")
+    print(f"✅ Performance baseline saved to: {output_file}")
     print(f"   Name: {baseline['name']}")
     print(f"   Type: {project_type}")
 
@@ -75,7 +75,7 @@ def detect_project_type():
 
 def profile_nodejs():
     """Generate profile data for Node.js projects"""
-    print("Profiling Node.js application...")
+    print("🔍 Profiling Node.js application...")
 
     # Try to use 0x if available
     try:
@@ -89,14 +89,14 @@ def profile_nodejs():
             with open(".claude/profile.json") as f:
                 return json.load(f)
     except Exception as e:
-        print(f"0x profiling failed: {e}")
+        print(f"⚠️  0x profiling failed: {e}")
 
     # Fallback: basic metrics
     return {"method": "basic", "metrics": {}}
 
 def profile_python():
     """Generate profile data for Python projects"""
-    print("Profiling Python application...")
+    print("🔍 Profiling Python application...")
 
     # Try to use py-spy if available
     try:
@@ -109,13 +109,13 @@ def profile_python():
         # Return basic info if py-spy succeeded
         return {"method": "py-spy", "output": ".claude/profile.svg"}
     except Exception as e:
-        print(f"py-spy profiling failed: {e}")
+        print(f"⚠️  py-spy profiling failed: {e}")
 
     return {"method": "basic", "metrics": {}}
 
 def profile_go():
     """Generate profile data for Go projects"""
-    print("Profiling Go application...")
+    print("🔍 Profiling Go application...")
 
     # Go profiling with pprof
     try:
@@ -131,7 +131,7 @@ def profile_go():
             "mem_profile": ".claude/mem.prof"
         }
     except Exception as e:
-        print(f"Go profiling failed: {e}")
+        print(f"⚠️  Go profiling failed: {e}")
 
     return {"method": "basic", "metrics": {}}
 

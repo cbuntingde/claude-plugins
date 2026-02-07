@@ -1,0 +1,9 @@
+{
+  "name": "orm-sql-converter",
+  "version": "1.0.0",
+  "description": "Convert between ORM queries (SQLAlchemy, Django ORM, Entity Framework, TypeORM, Sequelize) and raw SQL",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

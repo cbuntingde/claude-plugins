@@ -1,0 +1,9 @@
+{
+  "name": "dead-code-hunter",
+  "version": "1.0.0",
+  "description": "Finds truly unused code, identifies zombie config/files, and provides safe removal with rollback suggestions",
+  "author": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  }
+}

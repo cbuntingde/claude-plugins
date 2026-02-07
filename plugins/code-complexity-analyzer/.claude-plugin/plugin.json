@@ -1,0 +1,9 @@
+{
+  "name": "code-complexity-analyzer",
+  "version": "1.0.0",
+  "description": "Analyzes code complexity and suggests refactoring for overly complex functions",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

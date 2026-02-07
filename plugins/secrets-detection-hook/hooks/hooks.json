@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/detect-secrets.js",
+            "description": "Scan for secrets and sensitive information before executing tool"
+          }
+        ]
+      }
+    ]
+  }
+}

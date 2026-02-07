@@ -1,0 +1,9 @@
+{
+  "name": "auto-doc-updater",
+  "version": "1.0.0",
+  "description": "Automatically detect code changes and suggest documentation updates",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

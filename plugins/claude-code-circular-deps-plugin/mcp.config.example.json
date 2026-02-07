@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "circular-deps": {
+      "command": "node",
+      "args": [
+        "C:\\chris-dev\\claude-code-circular-deps-plugin\\dist\\index.js"
+      ]
+    }
+  }
+}

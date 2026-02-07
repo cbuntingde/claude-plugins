@@ -1,0 +1,9 @@
+{
+  "name": "semantic-code-search",
+  "version": "1.0.0",
+  "description": "Context-aware semantic code search that understands natural language queries",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

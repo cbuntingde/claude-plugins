@@ -1,0 +1,35 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Analyze the code that was just written/edited for technical debt. Check for:\n1. Code smells (long methods, complex logic, duplication)\n2. Security issues (input validation, injection risks)\n3. Design violations (SOLID principles, coupling)\n4. Maintainability concerns (naming, clarity, documentation)\n\nIf issues are found, provide:\n- Severity level (high/medium/low)\n- Specific location of the issue\n- Concrete recommendation for improvement\n\nOutput format: Keep it concise. Focus on actionable feedback.\n\nTool output:\n$ARGUMENTS"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if there are any critical technical debt items that should be brought to the user's attention at the start of this session. Look for:\n1. Previously identified high-priority debt items\n2. Security vulnerabilities\n3. Blocking issues\n4. Items that have been deferred too long\n\nIf found, briefly mention them with their priority level and impact. Keep it to 3-5 items maximum."
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Review the session's changes and assess whether new technical debt was introduced, reduced, or remained the same. Provide:\n1. Net change in technical debt score (if measurable)\n2. Any new debt items introduced\n3. Any debt items resolved\n4. Recommendations for next session\n\nKeep it brief and actionable."
+          }
+        ]
+      }
+    ]
+  }
+}

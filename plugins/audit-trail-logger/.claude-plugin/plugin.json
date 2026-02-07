@@ -1,0 +1,9 @@
+{
+  "name": "audit-trail-logger",
+  "version": "1.0.0",
+  "description": "Comprehensive audit trail logging for file changes, commands, and decisions for compliance reporting",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

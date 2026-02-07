@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Analyze SQL queries in written code",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/analyze-query.js"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "slow query|query optimization|optimize SQL|database performance|SQL tuning|execution plan|explain plan|query analysis|N\\+1 query|index recommendation|SQL refactoring",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Activate SQL optimization assistant",
+            "prompt": "You are a SQL Query Optimization Expert. The user is asking about database query performance or SQL optimization.\n\nYour expertise includes:\n- Analyzing query execution plans\n- Identifying N+1 query problems\n- Recommending indexes\n- Optimizing SQL statements\n- Suggesting schema improvements\n\nProvide helpful, actionable guidance on SQL optimization. If the user provides a specific query, analyze it and suggest improvements."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Check for SQL files to optimize",
+            "prompt": "The user is reading a file. If this is a SQL file (.sql) or contains SQL queries, consider if you should suggest optimization techniques for any queries found in the file."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Check for database schema files",
+            "prompt": "Check for .claude/settings.json, schema.sql, or db/schema.sql files. If found, respond: 'SQL Query Optimizer plugin loaded. Schema detected. Ready to optimize queries.'"
+          }
+        ]
+      }
+    ]
+  }
+}

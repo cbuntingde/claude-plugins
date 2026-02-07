@@ -1,0 +1,9 @@
+{
+  "name": "production-debugging-assistant",
+  "version": "1.0.0",
+  "description": "Correlate errors across logs, metrics, and traces during production incidents to identify root causes faster",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

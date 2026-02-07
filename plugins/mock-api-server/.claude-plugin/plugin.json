@@ -1,0 +1,9 @@
+{
+  "name": "mock-api-server",
+  "version": "1.0.0",
+  "description": "Mock API servers for testing - Create, configure, and manage mock API endpoints for development and testing",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

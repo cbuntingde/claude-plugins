@@ -1,0 +1,101 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Run quick API security check on file writes",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/quick-security-check.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Check for API security issues on write failures",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/security-fail-check.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Run API security check on session start",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/session-security-check.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "cors|cross.?origin|origin.?policy",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "CORS security guidance",
+            "prompt": "You are a CORS Security Expert. The user is asking about CORS configuration.\n\nProvide security-focused guidance on:\n- Origin whitelisting (never use * with credentials)\n- Proper Access-Control-Allow-* header configuration\n- Secure credential handling\n- Preflight request optimization\n- SameSite cookie configuration\n\nWarn against:\n- Allowing all origins with credentials enabled\n- Overly permissive origin patterns\n- Missing security headers\n\nProvide secure code examples for the user's framework."
+          }
+        ]
+      },
+      {
+        "matcher": "csrf|cross.?site.?request|request.?forgery",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "CSRF protection guidance",
+            "prompt": "You are a CSRF Protection Expert. The user is asking about CSRF protection.\n\nProvide comprehensive guidance on:\n- CSRF token generation using crypto.randomBytes\n- Token validation on state-changing operations\n- SameSite cookie attribute (Strict/Lax/None)\n- HttpOnly and Secure cookie flags\n- Double-submit cookie pattern\n- Framework-specific CSRF middleware\n\nWarn against:\n- Missing CSRF validation on POST/PUT/DELETE/PATCH\n- Storing tokens in localStorage\n- Predictable token generation\n\nProvide secure code examples for the user's framework."
+          }
+        ]
+      },
+      {
+        "matcher": "xss|cross.?site.?scripting|sanitiz|escape|content.?security",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "XSS prevention guidance",
+            "prompt": "You are an XSS Prevention Expert. The user is asking about XSS prevention.\n\nProvide thorough guidance on:\n- Input sanitization using validator.js, DOMPurify\n- Context-aware output encoding (HTML, JS, CSS, URL)\n- Content-Security-Policy header configuration\n- Avoiding innerHTML with user input\n- React/Vue/Angular built-in escaping\n- Safe DOM manipulation patterns\n\nWarn against:\n- innerHTML with untrusted data\n- document.write with user input\n- Client-side only validation\n\nProvide secure code examples for the user's framework."
+          }
+        ]
+      },
+      {
+        "matcher": "jwt|json.?web.?token|bearer.?token|access.?token",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "JWT security guidance",
+            "prompt": "You are a JWT Security Expert. The user is asking about JWT implementation.\n\nProvide detailed security guidance on:\n- Algorithm selection (RS256, ES256 recommended, avoid 'none')\n- Secret key strength (minimum 256 bits)\n- Required claims validation (iss, aud, exp, nbf)\n- Token storage (HttpOnly, Secure, SameSite cookies)\n- Access token vs refresh token patterns\n- Token refresh flow with rotation\n- Token revocation mechanisms\n\nWarn against:\n- Using 'none' algorithm\n- Weak secrets or hardcoded keys\n- Long-lived access tokens\n- Storing tokens in localStorage\n- Including sensitive data in payload\n\nProvide secure code examples for the user's framework."
+          }
+        ]
+      },
+      {
+        "matcher": "api.?key|api.?key.?rotation|key.?management",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "API key security guidance",
+            "prompt": "You are an API Key Security Expert. The user is asking about API key management.\n\nProvide comprehensive guidance on:\n- Cryptographically secure key generation (crypto.randomBytes)\n- Minimum 256-bit key length (32 bytes)\n- Key rotation every 90 days or less\n- Key versioning for graceful rotation\n- Secure storage (environment variables, secret managers)\n- API key validation middleware\n- Rate limiting per API key\n- Audit logging for key usage\n\nWarn against:\n- Hardcoding API keys in source code\n- Weak or predictable keys\n- Logging API keys\n- Never rotating keys\n- Exposing keys in error messages\n\nProvide secure code examples for the user's framework."
+          }
+        ]
+      },
+      {
+        "matcher": "api.?security|security.?audit|secure.?api",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "API security guidance",
+            "prompt": "You are an API Security Expert. The user is asking about API security.\n\nProvide comprehensive security guidance covering:\n- CORS configuration and origin whitelisting\n- CSRF protection for state-changing operations\n- XSS prevention for API responses\n- JWT security best practices\n- API key generation and rotation\n- Rate limiting and throttling\n- Input validation and sanitization\n- Security headers (CSP, HSTS, X-Frame-Options)\n- Authentication and authorization\n- Secure error handling (no stack traces)\n\nFollow OWASP security guidelines and provide specific code examples."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "rules": {
+    "naming": {
+      "variables": "camelCase",
+      "functions": "camelCase",
+      "classes": "PascalCase",
+      "constants": "UPPER_SNAKE_CASE",
+      "files": "kebab-case"
+    },
+    "formatting": {
+      "indentation": "spaces",
+      "indentSize": 2,
+      "maxLineLength": 100,
+      "trailingWhitespace": false,
+      "quoteStyle": "single",
+      "semicolons": true
+    },
+    "imports": {
+      "order": ["stdlib", "external", "internal"],
+      "blankLineBetweenGroups": true,
+      "sortWithinGroups": true
+    },
+    "documentation": {
+      "requireFunctionDocs": false,
+      "requireParamTypes": true,
+      "requireReturnTypes": true
+    },
+    "structure": {
+      "maxFileLength": 500,
+      "maxFunctionLength": 50,
+      "maxParameterCount": 5
+    }
+  },
+  "filePatterns": {
+    "include": ["**/*.{js,ts,jsx,tsx,py,go,java,cpp,c,h}"],
+    "exclude": ["**/node_modules/**", "**/dist/**", "**/build/**", "**/*.min.js"]
+  },
+  "enforcement": {
+    "onWrite": true,
+    "onEdit": true,
+    "severity": "warning"
+  }
+}

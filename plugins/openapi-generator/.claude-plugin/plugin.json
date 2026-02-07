@@ -1,0 +1,9 @@
+{
+  "name": "openapi-generator",
+  "version": "1.0.0",
+  "description": "Generate OpenAPI/Swagger specifications from code across multiple frameworks and languages",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

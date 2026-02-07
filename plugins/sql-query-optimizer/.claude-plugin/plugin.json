@@ -1,0 +1,9 @@
+{
+  "name": "sql-query-optimizer",
+  "version": "1.0.0",
+  "description": "Intelligent SQL query optimizer that analyzes, refactors, and optimizes complex SQL queries for better performance",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "env-generator",
+  "version": "1.0.0",
+  "description": "Automatically generate .env files by analyzing code for environment variable usage",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

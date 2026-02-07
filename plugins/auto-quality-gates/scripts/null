@@ -1,0 +1,7 @@
+#!/bin/bash
+# Null script placeholder for hooks that need optional behavior
+# This script does nothing and exits successfully
+# Used as a fallback when specific quality gate tools are not configured
+
+echo "Lint not configured"
+exit 0

@@ -1,0 +1,9 @@
+{
+  "name": "code-migration-assistant",
+  "version": "1.0.0",
+  "description": "Intelligent code migration assistant for upgrading between framework versions and translating between programming languages",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

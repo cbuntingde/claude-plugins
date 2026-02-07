@@ -1,0 +1,9 @@
+{
+  "name": "style-guide-enforcer",
+  "version": "1.0.0",
+  "description": "Style guide enforcer that maintains consistency with team conventions",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

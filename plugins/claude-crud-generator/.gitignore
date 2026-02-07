@@ -1,0 +1,32 @@
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+.env
+.env.local
+*.pyc
+__pycache__/
+.vscode/
+.idea/
+*.iml
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated output (optional)
+# output/
+
+# OS files
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~

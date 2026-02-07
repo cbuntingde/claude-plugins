@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and Discussion
+    url: https://github.com/claude-code-plugins/testing-assistant/discussions
+    about: Use GitHub Discussions for questions, ideas, and general discussion
+  - name: Security Vulnerability
+    url: mailto:security@claude-code-plugins.org
+    about: Report security vulnerabilities privately (DO NOT create public issues)
+  - name: Documentation
+    url: https://github.com/claude-code-plugins/testing-assistant/blob/main/README.md
+    about: Read the documentation for usage guides and examples

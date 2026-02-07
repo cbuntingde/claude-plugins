@@ -1,0 +1,9 @@
+{
+  "name": "bundle-size-analyzer",
+  "version": "1.0.0",
+  "description": "Analyze bundle sizes and identify tree-shaking opportunities for JavaScript/TypeScript projects",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

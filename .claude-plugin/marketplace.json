@@ -18,6 +18,259 @@
       "license": "MIT"
     },
     {
+      "name": "architecture-gatekeeper",
+      "version": "1.0.0",
+      "description": "Comprehensive architecture validation plugin that prevents commits violating architecture patterns or creating circular dependencies.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/architecture-gatekeeper",
+      "license": "MIT"
+    },
+    {
+      "name": "api-doc-generator-plugin",
+      "version": "1.0.0",
+      "description": "Generates comprehensive API documentation from source code and OpenAPI specifications.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/api-doc-generator-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "api-integration-generator",
+      "version": "1.0.0",
+      "description": "Generate fully-typed, error-handled API client code from OpenAPI/Swagger specifications or documentation.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/api-integration-generator",
+      "license": "MIT"
+    },
+    {
+      "name": "api-security-hardening",
+      "version": "1.0.0",
+      "description": "Comprehensive API security hardening plugin providing CORS, CSRF, XSS protection, API key rotation, and JWT flow security.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/api-security-hardening",
+      "license": "MIT"
+    },
+    {
+      "name": "aria-improver",
+      "version": "1.0.0",
+      "description": "Automatically suggests ARIA labels and semantic HTML improvements for better accessibility and SEO.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/aria-improver",
+      "license": "MIT"
+    },
+    {
+      "name": "audit-trail-logger",
+      "version": "1.0.0",
+      "description": "Comprehensive audit trail logging for compliance reporting. Captures all file changes, commands, and decisions with timestamps and session tracking.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/audit-trail-logger",
+      "license": "MIT"
+    },
+    {
+      "name": "auto-doc-updater-plugin",
+      "version": "1.0.0",
+      "description": "Automatically detects code changes and suggests documentation updates.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/auto-doc-updater-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "auto-memory-plugin",
+      "version": "1.0.0",
+      "description": "Automatic memory system inspired by MemRL that hooks into Claude Code lifecycle events for seamless context retention.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/auto-memory-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "auto-quality-gates",
+      "version": "1.0.0",
+      "description": "Comprehensive automated testing and quality gates configuration framework for Claude Code.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/auto-quality-gates",
+      "license": "MIT"
+    },
+    {
+      "name": "bug-catcher-plugin",
+      "version": "1.0.0",
+      "description": "Automatically captures tool execution failures and provides commands to view them in a formatted table.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/bug-catcher-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "bundle-size-analyzer",
+      "version": "1.0.0",
+      "description": "A comprehensive Claude Code plugin for analyzing JavaScript/TypeScript bundle sizes and identifying tree-shaking opportunities.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/bundle-size-analyzer",
+      "license": "MIT"
+    },
+    {
+      "name": "ci-cd-pipeline-generator",
+      "version": "1.0.0",
+      "description": "Generates CI/CD pipelines for GitHub Actions, GitLab CI, and Jenkins with best practices and common patterns.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/ci-cd-pipeline-generator",
+      "license": "MIT"
+    },
+    {
+      "name": "claude-code-api-doc-plugin",
+      "version": "1.0.0",
+      "description": "A comprehensive Claude Code plugin for generating API documentation portals with static sites, interactive explorers, code examples, SDK documentation, and changelogs.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/claude-code-api-doc-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "claude-code-circular-deps-plugin",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin (MCP server) that detects circular dependencies in TypeScript and JavaScript projects and provides actionable suggestions for fixing them.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/claude-code-circular-deps-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "claude-crud-generator",
+      "version": "1.0.0",
+      "description": "Generate complete CRUD operations from database schemas for multiple frameworks and languages.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/claude-crud-generator",
+      "license": "MIT"
+    },
+    {
+      "name": "claude-md-hook",
+      "version": "1.0.0",
+      "description": "Automatically includes your CLAUDE.md project rules with every user prompt.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/claude-md-hook",
+      "license": "MIT"
+    },
+    {
+      "name": "claude-migration-generator",
+      "version": "1.0.0",
+      "description": "Generate database migrations from natural language schema descriptions across multiple ORMs and frameworks.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/claude-migration-generator",
+      "license": "MIT"
+    },
+    {
+      "name": "code-complexity-analyzer",
+      "version": "1.0.0",
+      "description": "A comprehensive Claude Code plugin that analyzes code complexity and provides intelligent refactoring suggestions to improve maintainability and readability.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/code-complexity-analyzer",
+      "license": "MIT"
+    },
+    {
+      "name": "code-migration-assistant",
+      "version": "1.0.0",
+      "description": "An intelligent Claude Code plugin for upgrading between framework versions and translating between programming languages.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/code-migration-assistant",
+      "license": "MIT"
+    },
+    {
+      "name": "commit-gen-plugin",
+      "version": "1.0.0",
+      "description": "Generates conventional commit messages based on staged changes.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/commit-gen-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "compliance-assistant-plugin",
+      "version": "1.0.0",
+      "description": "A comprehensive compliance scanner plugin for Claude Code that detects GDPR, HIPAA, SOC2 violations and PII handling issues.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/compliance-assistant-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "cross-repo-knowledge-navigator",
+      "version": "1.0.0",
+      "description": "An AI-powered knowledge navigator that searches across multiple repositories, Slack threads, Jira tickets, and Confluence docs to answer company-wide questions.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/cross-repo-knowledge-navigator",
+      "license": "MIT"
+    },
+    {
+      "name": "dead-code-hunter",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin that scans codebases to identify unused code, zombie files, and stale configurations with safe removal and rollback support.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/dead-code-hunter",
+      "license": "MIT"
+    },
+    {
       "name": "dependency-safety-scanner",
       "version": "1.0.0",
       "description": "Analyzes npm dependencies for vulnerabilities, bloat, and license issues.",
@@ -40,14 +293,14 @@
       "license": "MIT"
     },
     {
-      "name": "ci-cd-pipeline-generator",
+      "name": "diagram-generator-plugin",
       "version": "1.0.0",
-      "description": "Generates CI/CD pipelines for GitHub Actions, GitLab CI, and Jenkins with best practices and common patterns.",
+      "description": "Generates architectural diagrams from code using Mermaid, PlantUML, or DOT formats. Analyzes project structure and automatically identifies components, dependencies, and relationships.",
       "author": {
         "name": "Chris Bunting",
         "email": "cbuntingde@gmail.com"
       },
-      "source": "./plugins/ci-cd-pipeline-generator",
+      "source": "./plugins/diagram-generator-plugin",
       "license": "MIT"
     },
     {
@@ -62,6 +315,72 @@
       "license": "MIT"
     },
     {
+      "name": "env-generator-plugin",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin that automatically generates .env files by analyzing your codebase for environment variable usage patterns.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/env-generator-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "env-var-detect",
+      "version": "1.0.0",
+      "description": "Automatically detect missing environment variables in your codebase with this Claude Code plugin.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/env-var-detect",
+      "license": "MIT"
+    },
+    {
+      "name": "error-explainer",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin that provides context and solutions for cryptic error messages.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/error-explainer",
+      "license": "MIT"
+    },
+    {
+      "name": "gdpr-privacy-scanner",
+      "version": "1.0.0",
+      "description": "Production-ready GDPR compliance scanner with comprehensive PII detection, data retention validation, and consent management verification.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/gdpr-privacy-scanner",
+      "license": "MIT"
+    },
+    {
+      "name": "hook-test-plugin",
+      "version": "1.0.0",
+      "description": "A plugin for testing Claude Code hook functionality.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/hook-test-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "intelligent-refactoring-assistant",
+      "version": "1.0.0",
+      "description": "Safe, context-aware refactoring tools for modernizing legacy code, extracting duplicated logic, and applying design patterns with confidence.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/intelligent-refactoring-assistant",
+      "license": "MIT"
+    },
+    {
       "name": "mcp-json-setup",
       "version": "1.0.0",
       "description": "Manages Claude Code MCP server configurations.",
@@ -73,14 +392,58 @@
       "license": "MIT"
     },
     {
-      "name": "qa-assistant",
+      "name": "memory-leak-detector-plugin",
       "version": "1.0.0",
-      "description": "Comprehensive quality assurance and production readiness checks including breaking change detection, code quality analysis, and security scanning.",
+      "description": "A Claude Code plugin that detects memory leaks and provides actionable suggestions for fixing them in JavaScript, TypeScript, and Python codebases.",
       "author": {
         "name": "Chris Bunting",
         "email": "cbuntingde@gmail.com"
       },
-      "source": "./plugins/qa-assistant",
+      "source": "./plugins/memory-leak-detector-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "memory-system-plugin",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin for managing persistent memory across sessions for long-running AI assistance.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/memory-system-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "mock-api-server",
+      "version": "1.0.0",
+      "description": "Create, configure, and manage mock API servers for testing and development without backend dependencies.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/mock-api-server",
+      "license": "MIT"
+    },
+    {
+      "name": "multi-agent-orchestrator",
+      "version": "1.0.0",
+      "description": "Orchestrates multiple parallel AI agents for comprehensive code analysis, review, and automated fixes.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/multi-agent-orchestrator",
+      "license": "MIT"
+    },
+    {
+      "name": "openapi-generator",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin that automatically generates OpenAPI 3.0 and Swagger 2.0 specifications from your codebase.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/openapi-generator",
       "license": "MIT"
     },
     {
@@ -95,6 +458,17 @@
       "license": "MIT"
     },
     {
+      "name": "orm-sql-converter",
+      "version": "1.0.0",
+      "description": "A powerful Claude Code plugin for converting between ORM queries and raw SQL across multiple programming languages, frameworks, and database systems.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/orm-sql-converter",
+      "license": "MIT"
+    },
+    {
       "name": "performance-profiler",
       "version": "1.0.0",
       "description": "Profiles and analyzes code performance.",
@@ -103,6 +477,160 @@
         "email": "cbuntingde@gmail.com"
       },
       "source": "./plugins/performance-profiler",
+      "license": "MIT"
+    },
+    {
+      "name": "pr-review-enforcer",
+      "version": "1.0.0",
+      "description": "Comprehensive PR and code review enforcement plugin ensuring PR descriptions, tests, and documentation exist before merge.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/pr-review-enforcer",
+      "license": "MIT"
+    },
+    {
+      "name": "production-debugging-assistant",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin that helps you correlate errors across logs, metrics, and traces during production incidents to identify root causes faster.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/production-debugging-assistant",
+      "license": "MIT"
+    },
+    {
+      "name": "qa-assistant",
+      "version": "1.0.0",
+      "description": "Comprehensive quality assurance and production readiness checks including breaking change detection, code quality analysis, and security scanning.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/qa-assistant",
+      "license": "MIT"
+    },
+    {
+      "name": "review-squad-coordinator",
+      "version": "1.0.0",
+      "description": "Auto-assign code reviewers based on code ownership patterns, expertise analysis, and availability.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/review-squad-coordinator",
+      "license": "MIT"
+    },
+    {
+      "name": "secrets-detection-hook",
+      "version": "1.0.0",
+      "description": "A security-focused Claude Code plugin that detects and blocks commands/files containing API keys, passwords, or personally identifiable information before execution.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/secrets-detection-hook",
+      "license": "MIT"
+    },
+    {
+      "name": "security-scanner-plugin",
+      "version": "1.0.0",
+      "description": "A comprehensive security scanner plugin for Claude Code that detects common vulnerabilities, security misconfigurations, and provides actionable fix recommendations.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/security-scanner-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "semantic-code-search",
+      "version": "1.0.0",
+      "description": "Transform how you find code by searching using natural language instead of exact keywords.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/semantic-code-search",
+      "license": "MIT"
+    },
+    {
+      "name": "sql-query-optimizer",
+      "version": "1.0.0",
+      "description": "A comprehensive SQL query optimization plugin for Claude Code that analyzes, refactors, and optimizes complex SQL queries for better database performance.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/sql-query-optimizer",
+      "license": "MIT"
+    },
+    {
+      "name": "style-guide-enforcer",
+      "version": "1.0.0",
+      "description": "A comprehensive Claude Code plugin for maintaining consistent code style and team conventions.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/style-guide-enforcer",
+      "license": "MIT"
+    },
+    {
+      "name": "style-guide-plugin",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin for accessing programming style guides and best practices with automatic fetching.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/style-guide-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "tavily-search-plugin",
+      "version": "1.0.0",
+      "description": "A Claude Code plugin for web search and research using Tavily AI search engine.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/tavily-search-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "tech-debt-tracker",
+      "version": "1.0.0",
+      "description": "A comprehensive Claude Code plugin for identifying, tracking, and prioritizing technical debt in your codebase.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/tech-debt-tracker",
+      "license": "MIT"
+    },
+    {
+      "name": "testing-assistant-plugin",
+      "version": "1.0.0",
+      "description": "Enterprise-grade testing assistant for Claude Code - automated test generation, edge case identification, and test quality improvement.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/testing-assistant-plugin",
+      "license": "MIT"
+    },
+    {
+      "name": "ticket-sync-hook",
+      "version": "1.0.0",
+      "description": "Automatically update Jira and Linear tickets based on git commit activity.",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/ticket-sync-hook",
       "license": "MIT"
     },
     {
@@ -117,14 +645,14 @@
       "license": "MIT"
     },
     {
-      "name": "auto-memory-plugin",
+      "name": "wcag-scanner-plugin",
       "version": "1.0.0",
-      "description": "Automatic memory system inspired by MemRL that hooks into Claude Code lifecycle events for seamless context retention",
+      "description": "A comprehensive Claude Code plugin for scanning WCAG 2.2 compliance issues in web applications.",
       "author": {
         "name": "Chris Bunting",
         "email": "cbuntingde@gmail.com"
       },
-      "source": "./plugins/auto-memory-plugin",
+      "source": "./plugins/wcag-scanner-plugin",
       "license": "MIT"
     }
   ]

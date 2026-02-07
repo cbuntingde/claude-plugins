@@ -1,0 +1,9 @@
+{
+  "name": "memory-leak-detector",
+  "version": "1.0.0",
+  "description": "Detect memory leaks and provide actionable suggestions for fixing them in JavaScript, TypeScript, and Python codebases",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

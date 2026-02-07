@@ -1,0 +1,15 @@
+{
+  "name": "claude-code-circular-deps-plugin",
+  "version": "1.0.0",
+  "description": "Claude Code plugin for detecting circular dependencies and suggesting fixes",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  },
+  "commands": [
+    "./commands/detect-circular.md",
+    "./commands/fix-circular.md",
+    "./commands/monitor-deps.md",
+    "./commands/visualize-deps.md"
+  ]
+}

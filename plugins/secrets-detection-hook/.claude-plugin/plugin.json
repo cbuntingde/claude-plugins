@@ -1,0 +1,9 @@
+{
+  "name": "secrets-detection-hook",
+  "version": "1.0.0",
+  "description": "Detects and blocks commands/files containing API keys, passwords, or PII before execution",
+  "author": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  }
+}

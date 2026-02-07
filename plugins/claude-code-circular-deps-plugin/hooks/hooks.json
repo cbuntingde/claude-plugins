@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Check for circular dependencies after code modifications",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-circular.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "circular.*depend|depend.*circular|circular.*import|import.*cycle|cycle.*import|module.*cycle",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Activate circular dependency detection assistant",
+            "prompt": "You are a Circular Dependency Expert. The user is asking about circular dependencies in their codebase.\n\nYour expertise includes:\n- Detecting circular imports and module cycles\n- Analyzing dependency graphs\n- Suggesting refactoring strategies to break cycles\n- Common patterns that cause circular dependencies\n- TypeScript and JavaScript module resolution\n\nProvide helpful, actionable guidance on resolving circular dependencies. If the user provides specific file paths or code snippets, analyze them and suggest concrete fixes."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "description": "Initialize dependency tracking for session",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/init-session.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Check if written files might need migration assistance",
+            "prompt": "The user just wrote or edited code files. Check if:\n\n1. Any deprecated API patterns were introduced\n2. Code uses older framework versions that could be upgraded\n3. Code patterns suggest a need for type safety (TypeScript)\n4. Dependencies are outdated or have security issues\n\nIf you detect any of these patterns, suggest using the code migration assistant plugin commands:\n- /migrate-check - Check for compatibility issues\n- /migrate-analyze - Analyze migration complexity\n- /migrate-plan - Create a migration plan\n\nBe helpful but not intrusive - only suggest if it would genuinely improve the code quality."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Notify user about migration capabilities at session start",
+            "prompt": "Welcome! The Code Migration Assistant plugin is now available.\n\nThis plugin provides expert assistance for:\n- Upgrading framework versions (React, Vue, Angular, Next.js, etc.)\n- Migrating between languages (JavaScript ↔ TypeScript, Python 2→3, etc.)\n- Updating dependencies and resolving conflicts\n- Analyzing codebases for migration complexity\n\nAvailable commands:\n- /migrate-plan - Create a comprehensive migration plan\n- /migrate-check - Check compatibility of specific files\n- /migrate-apply - Apply automated migrations\n- /migrate-analyze - Analyze codebase complexity\n\nGet started by asking: 'Help me upgrade to [version]' or 'Check if my code is compatible with [version]'"
+          }
+        ]
+      }
+    ]
+  }
+}

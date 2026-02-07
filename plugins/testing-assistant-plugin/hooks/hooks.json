@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Intelligently suggest tests for production code changes",
+            "prompt": "You are a testing assistant plugin. Check if automated test suggestions are appropriate:\n\nCONTEXT: User just wrote or modified code using Write or Edit tools.\n\nDECISION FRAMEWORK:\n1. Is this production code (not test code, config, or docs)?\n2. Is the code non-trivial (not simple getters/setters, constants, or type definitions)?\n3. Have we NOT already suggested tests for this file in this session?\n4. Is the suggestion count below the maxSuggestionsPerSession limit (${settings.maxSuggestionsPerSession})?\n\nIf ALL conditions are met, provide concise testing suggestions:\n\n**Testing Suggestions for [filename]:**\n\n**Test Coverage Needed:**\n- [Key functionality to test]\n\n**Critical Edge Cases:**\n- [2-3 most important edge cases]\n\n**Suggested Command:**\n```\n/generate-tests [file_path]\n```\n\nKeep suggestions under 5 lines total. If conditions aren't met, do nothing."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "description": "Remind to run tests before deploying",
+            "prompt": "The user is running a bash command. Check if this is a deployment/push/merge scenario:\n\nANALYSIS:\n1. Does the command contain deploy/push/merge/release keywords?\n2. Are there test files in the project (tests/, __tests__, *.test.*, *.spec.*)?\n3. Would running tests be valuable before this operation?\n\nIf YES to all, provide a SINGLE, brief reminder:\n\n\"💡 Consider running tests first: [your test command]\"\n\nDetect the test command from common patterns (npm test, pytest, go test, etc.).\n\nIf NO to any condition, do nothing. Keep reminders minimal - maximum 1 per session."
+          }
+        ]
+      }
+    ]
+  }
+}

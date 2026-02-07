@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "You just wrote or edited a file. Quick check: Does this file contain any web-related code (HTML, CSS, JavaScript, TypeScript, JSX, TSX, Vue, Svelte, or Astro)? If yes, perform a quick WCAG accessibility scan for critical issues only. Focus on: 1) Missing alt text on images, 2) Form inputs without labels, 3) Empty or generic link text, 4) Very low contrast (below 3:1), 5) Missing lang attribute. Report only critical issues found. If no critical issues or not a web file, respond with '✓ No critical accessibility issues found.'"
+          }
+        ]
+      }
+    ]
+  }
+}

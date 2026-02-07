@@ -1,0 +1,9 @@
+{
+  "name": "gdpr-privacy-scanner",
+  "version": "1.0.0",
+  "description": "Production-ready GDPR/Privacy compliance scanner with PII detection, data retention validation, and consent management verification",
+  "author": {
+    "name": "Chris Bunting",
+    "email": "cbuntingde@gmail.com"
+  }
+}

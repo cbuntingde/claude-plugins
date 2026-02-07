@@ -1,0 +1,9 @@
+{
+  "name": "compliance-assistant-plugin",
+  "version": "1.0.0",
+  "description": "Comprehensive compliance scanner for GDPR, HIPAA, SOC2 violations and PII handling detection",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

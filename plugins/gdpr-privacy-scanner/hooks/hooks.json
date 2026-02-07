@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Review the code changes for potential GDPR compliance issues:\n\n1. Check if any PII (email, phone, SSN, etc.) is being hardcoded\n2. Verify no personal data is being logged\n3. Ensure sensitive data is encrypted\n4. Check if consent tracking is needed\n5. Verify data retention considerations\n\nIf any GDPR issues are detected, provide specific remediation recommendations."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before proceeding with any user data processing:\n\n1. Confirm the lawful basis for processing (consent, contractual, legitimate interest)\n2. Verify that data collection is minimized to what's necessary\n3. Ensure privacy by design principles are followed\n4. Consider data subject rights (access, erasure, portability)\n5. Check if a DPIA is required for this processing\n\nDocument the GDPR compliance considerations for this work."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before executing this command that may process personal data:\n\n1. Verify that the operation complies with GDPR requirements\n2. Ensure no PII will be exposed in logs or error messages\n3. Confirm data is encrypted at rest and in transit\n4. Check that access controls are in place\n5. Verify audit trail will be maintained\n\nIf any concerns exist, recommend safer alternatives."
+          }
+        ]
+      }
+    ]
+  }
+}

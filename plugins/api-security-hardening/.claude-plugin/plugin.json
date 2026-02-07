@@ -1,0 +1,9 @@
+{
+  "name": "api-security-hardening",
+  "version": "1.0.0",
+  "description": "API security hardening plugin for CORS, CSRF, XSS protection, API key rotation, and JWT flows",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}

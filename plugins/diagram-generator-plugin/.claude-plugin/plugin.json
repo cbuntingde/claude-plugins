@@ -1,0 +1,9 @@
+{
+  "name": "diagram-generator",
+  "version": "1.0.0",
+  "description": "Generate architectural diagrams (Mermaid, PlantUML, DOT) from code",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  }
+}
