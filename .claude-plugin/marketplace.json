@@ -172,6 +172,17 @@
       "license": "MIT"
     },
     {
+      "name": "claude-context-plugin",
+      "version": "1.0.0",
+      "description": "Native Claude Code plugin with automatic hooks that capture context throughout sessions",
+      "author": {
+        "name": "Chris Bunting",
+        "email": "cbuntingde@gmail.com"
+      },
+      "source": "./plugins/claude-context-plugin",
+      "license": "MIT"
+    },
+    {
       "name": "claude-crud-generator",
       "version": "1.0.0",
       "description": "Generate complete CRUD operations from database schemas for multiple frameworks and languages.",

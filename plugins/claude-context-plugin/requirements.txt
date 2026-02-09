@@ -1,0 +1,5 @@
+# Context Memory Plugin Dependencies
+claude-code-sdk>=1.0.0
+
+# Optional: for enhanced logging
+rich>=13.0.0

@@ -1,0 +1,17 @@
+{
+  "name": "claude-context-plugin",
+  "version": "1.0.0",
+  "description": "Native Claude Code plugin with automatic hooks that capture context throughout sessions",
+  "author": {
+    "name": "cbuntingde",
+    "email": "cbuntingde@gmail.com"
+  },
+  "keywords": [
+    "memory",
+    "context",
+    "hooks",
+    "sessions",
+    "automatic",
+    "tracking"
+  ]
+}
