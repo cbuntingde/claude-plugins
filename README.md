@@ -1,6 +1,6 @@
 # Claude Code Plugins
 
-A comprehensive collection of 61 plugins extending Claude Code with specialized capabilities for architecture review, dependency analysis, deployment planning, security scanning, performance optimization, and much more.
+A comprehensive collection of 55 plugins extending Claude Code with specialized capabilities for architecture review, dependency analysis, deployment planning, security scanning, performance optimization, and much more.
 
 ## Overview
 
@@ -37,7 +37,6 @@ cd claude-plugins
 | [Architecture Gatekeeper](plugins/architecture-gatekeeper/) | Comprehensive architecture validation plugin that prevents commits violating architecture patterns or creating circular dependencies | Architecture |
 | [Code Complexity Analyzer](plugins/code-complexity-analyzer/) | Analyzes code complexity and provides intelligent refactoring suggestions to improve maintainability and readability | Code Quality |
 | [Style Guide Enforcer](plugins/style-guide-enforcer/) | A comprehensive Claude Code plugin for maintaining consistent code style and team conventions | Code Quality |
-| [Style Guide Plugin](plugins/style-guide-plugin/) | A Claude Code plugin for accessing programming style guides and best practices with automatic fetching | Code Quality |
 | [Dead Code Hunter](plugins/dead-code-hunter/) | Scans codebases to identify unused code, zombie files, and stale configurations with safe removal and rollback support | Code Quality |
 | [Circular Deps Detector](plugins/claude-code-circular-deps-plugin/) | Detects circular dependencies in TypeScript and JavaScript projects and provides actionable suggestions for fixing them | Code Quality |
 
@@ -87,7 +86,6 @@ cd claude-plugins
 | [QA Assistant](plugins/qa-assistant/) | Comprehensive quality assurance and production readiness checks including breaking change detection | Quality Assurance |
 | [Auto Quality Gates](plugins/auto-quality-gates/) | Comprehensive automated testing and quality gates configuration framework | Quality Assurance |
 | [Testing Assistant](plugins/testing-assistant-plugin/) | Enterprise-grade testing assistant - automated test generation, edge case identification, and test quality improvement | Testing |
-| [Hook Test Plugin](plugins/hook-test-plugin/) | A plugin for testing Claude Code hook functionality | Testing |
 | [Bug Catcher Plugin](plugins/bug-catcher-plugin/) | Automatically captures tool execution failures and provides commands to view them in a formatted table | Testing |
 | [Mock API Server](plugins/mock-api-server/) | Create, configure, and manage mock API servers for testing and development | Testing |
 
@@ -122,7 +120,6 @@ cd claude-plugins
 
 | Plugin | Description | Category |
 |--------|-------------|----------|
-| [MCP JSON Setup](plugins/mcp-json-setup/) | Configures and manages Model Context Protocol (MCP) servers from JSON configurations | Configuration |
 | [Env Generator Plugin](plugins/env-generator-plugin/) | Automatically generates .env files by analyzing your codebase for environment variable usage patterns | Configuration |
 | [Env Var Detect](plugins/env-var-detect/) | Automatically detect missing environment variables in your codebase | Configuration |
 
@@ -135,7 +132,6 @@ cd claude-plugins
 | [Review Squad Coordinator](plugins/review-squad-coordinator/) | Auto-assign code reviewers based on code ownership patterns, expertise analysis, and availability | Workflow |
 | [Commit Gen Plugin](plugins/commit-gen-plugin/) | Generates conventional commit messages based on staged changes | Workflow |
 | [Audit Trail Logger](plugins/audit-trail-logger/) | Comprehensive audit trail logging for compliance reporting with timestamps and session tracking | Workflow |
-| [Claude MD Hook](plugins/claude-md-hook/) | Automatically includes your CLAUDE.md project rules with every user prompt | Workflow |
 
 ### Accessibility
 
@@ -151,9 +147,7 @@ cd claude-plugins
 | [Error Explainer](plugins/error-explainer/) | Provides context and solutions for cryptic error messages | Tools |
 | [Production Debugging Assistant](plugins/production-debugging-assistant/) | Correlates errors across logs, metrics, and traces during production incidents to identify root causes | Tools |
 | [Multi-Agent Orchestrator](plugins/multi-agent-orchestrator/) | Orchestrates multiple parallel AI agents for comprehensive code analysis, review, and automated fixes | Tools |
-| [Auto Memory Plugin](plugins/auto-memory-plugin/) | Automatic memory system that hooks into Claude Code lifecycle events for seamless context retention | Tools |
-| [Memory System Plugin](plugins/memory-system-plugin/) | Manages persistent memory across sessions for long-running AI assistance | Tools |
-| [Tavily Search Plugin](plugins/tavily-search-plugin/) | Web search and research using Tavily AI search engine | Tools |
+| [Claude Context Plugin](plugins/claude-context-plugin/) | Automatic context memory plugin with hooks for session, messages, tools, and decisions | Tools |
 
 ## Usage
 
