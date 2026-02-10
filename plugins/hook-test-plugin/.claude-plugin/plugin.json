@@ -1,9 +1,0 @@
-{
-  "name": "hook-test-plugin",
-  "version": "1.0.0",
-  "description": "Test plugin to verify hooks are working",
-  "author": {
-    "name": "Test",
-    "email": "cbuntingde@gmail.com"
-  }
-}

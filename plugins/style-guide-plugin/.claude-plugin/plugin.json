@@ -1,9 +1,0 @@
-{
-  "name": "style-guide-plugin",
-  "version": "1.0.0",
-  "description": "Get programming style guides and best practices for any language",
-  "author": {
-    "name": "cbuntingde",
-    "email": "cbuntingde@gmail.com"
-  }
-}

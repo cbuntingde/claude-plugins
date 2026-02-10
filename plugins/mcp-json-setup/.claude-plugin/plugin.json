@@ -1,9 +1,0 @@
-{
-  "name": "mcp-json-setup",
-  "version": "1.0.0",
-  "description": "Plugin for automatic MCP server setup from JSON configuration",
-  "author": {
-    "name": "cbuntingde",
-    "email": "cbuntingde@gmail.com"
-  }
-}
