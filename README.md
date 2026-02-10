@@ -147,7 +147,6 @@ cd claude-plugins
 | [Error Explainer](plugins/error-explainer/) | Provides context and solutions for cryptic error messages | Tools |
 | [Production Debugging Assistant](plugins/production-debugging-assistant/) | Correlates errors across logs, metrics, and traces during production incidents to identify root causes | Tools |
 | [Multi-Agent Orchestrator](plugins/multi-agent-orchestrator/) | Orchestrates multiple parallel AI agents for comprehensive code analysis, review, and automated fixes | Tools |
-| [Claude Context Plugin](plugins/claude-context-plugin/) | Automatic context memory plugin with hooks for session, messages, tools, and decisions | Tools |
 
 ## Usage
 
