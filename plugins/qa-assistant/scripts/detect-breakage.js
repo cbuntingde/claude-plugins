@@ -40,7 +40,7 @@ try {
   const assistant = new QAAssistant();
 
   // Change to plugin directory for proper execution
-  process.chdir(qaIndex);
+  process.chdir(path.dirname(qaIndex));
   process.env.CLAUDE_PLUGIN_ROOT = qaIndex;
 
   const args = process.argv.slice(2);

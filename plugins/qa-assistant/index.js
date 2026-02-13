@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * QA Assistant Plugin
  * Comprehensive quality assurance and production readiness checks
@@ -69,7 +68,13 @@ class QAAssistant {
    * Run checks with optional project context
    */
   runChecks(options = {}) {
+    if (options.projectRoot && typeof options.projectRoot !== 'string') {
+      throw new Error('projectRoot must be a string');
+    }
     this.rootDir = options.projectRoot || getProjectRoot();
+    if (!this.rootDir || !fs.existsSync(this.rootDir)) {
+      throw new Error(`Invalid project root: ${this.rootDir}`);
+    }
     this.cacheDir = path.join(this.rootDir, '.qa-cache');
     this.initCache();
 
@@ -245,7 +250,7 @@ class QAAssistant {
 
     // Check security audit
     try {
-      const auditOutput = execSync('npm audit --audit-level=high', { cwd: rootDir, encoding: 'utf-8' });
+      const auditOutput = execSync('npm audit --audit-level=high', { cwd: rootDir, encoding: 'utf-8', timeout: 30000 });
       const hasVulnerabilities = auditOutput.toLowerCase().includes('vulnerability');
       requirements['Security audit'] = !hasVulnerabilities;
       if (hasVulnerabilities) {
@@ -362,7 +367,7 @@ class QAAssistant {
                            (content.match(/const\s+\w+\s*=\s*(?:async\s+)?(?:\w+|[\{\[].*=>/g) || []).length +
                            (content.match(/const\s+\w+\s*=\s*\(/g) || []).length;
 
-      if (functionCount > 50 && file.includes('core') || file.includes('lib')) {
+      if (functionCount > 50 && (file.includes('core') || file.includes('lib'))) {
         issues.push({
           severity: 'info',
           file,
@@ -410,27 +415,27 @@ class QAAssistant {
     const securityChecks = [
       {
         name: 'Hardcoded Secrets',
-        check: this.checkHardcodedSecrets
+        check: this.checkHardcodedSecrets.bind(this)
       },
       {
         name: 'SQL Injection Risk',
-        check: this.checkSqlInjection
+        check: this.checkSqlInjection.bind(this)
       },
       {
         name: 'Command Injection Risk',
-        check: this.checkCommandInjection
+        check: this.checkCommandInjection.bind(this)
       },
       {
         name: 'Path Traversal',
-        check: this.checkPathTraversal
+        check: this.checkPathTraversal.bind(this)
       },
       {
         name: 'Deprecation Warnings',
-        check: this.checkDeprecations
+        check: this.checkDeprecations.bind(this)
       },
       {
         name: 'Buffer Overflows',
-        check: this.checkBufferOverflows
+        check: this.checkBufferOverflows.bind(this)
       }
     ];
 
@@ -668,7 +673,7 @@ class QAAssistant {
     const httpsConfigs = this.findFiles(rootDir, ['*.js', '*.ts', '*.json']);
     for (const file of httpsConfigs) {
       const content = fs.readFileSync(file, 'utf-8');
-      if (content.includes('https://') && !content.includes('rejectUnauthorized') && !content.includes('rejectUnauthorized')) {
+        if (content.includes('https://') && !content.includes('rejectUnauthorized')) {
         issues.push({
           severity: 'warning',
           file,
@@ -742,10 +747,22 @@ class QAAssistant {
     const matches = [];
 
     const processDir = (dir) => {
-      const files = fs.readdirSync(dir);
+      let files;
+      try {
+        files = fs.readdirSync(dir);
+      } catch (err) {
+        console.warn(`Warning: Unable to read directory ${dir}: ${err.message}`);
+        return;
+      }
       for (const file of files) {
         const fullPath = path.join(dir, file);
-        const stats = fs.statSync(fullPath);
+        let stats;
+        try {
+          stats = fs.statSync(fullPath);
+        } catch (err) {
+          console.warn(`Warning: Unable to stat ${fullPath}: ${err.message}`);
+          continue;
+        }
 
         if (stats.isDirectory() && (recursive || patterns.some(p => !p.includes('**')))) {
           if (patterns.some(p => !p.includes('**')) || file !== 'node_modules') {
@@ -874,5 +891,3 @@ function main() {
 if (require.main === module) {
   main();
 }
-
-module.exports = QAAssistant;
