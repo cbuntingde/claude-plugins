@@ -15,8 +15,8 @@ if (!rootDir) {
   process.exit(1);
 }
 
-const pluginPath = path.dirname(rootDir);
-const qaIndex = path.join(pluginPath, 'index.js');
+const pluginPath = rootDir;
+const qaIndex = path.join(rootDir, 'index.js');
 
 if (!fs.existsSync(qaIndex)) {
   console.error(`Error: QA assistant not found at ${qaIndex}`);
@@ -29,11 +29,11 @@ try {
   // Require and run QA Assistant
   const QAAssistant = require(qaIndex);
   const assistant = new QAAssistant();
-  process.chdir(qaIndex);
-  process.env.CLAUDE_PLUGIN_ROOT = qaIndex;
+  process.chdir(pluginPath);
+  process.env.CLAUDE_PLUGIN_ROOT = pluginPath;
 
   const result = assistant.runChecks({
-    thorough: true
+    deepScan: true
   });
 
   if (!result.passed) {

@@ -95,17 +95,6 @@
       "license": "MIT"
     },
     {
-      "name": "auto-memory-plugin",
-      "version": "1.0.0",
-      "description": "Automatic memory system inspired by MemRL that hooks into Claude Code lifecycle events for seamless context retention.",
-      "author": {
-        "name": "Chris Bunting",
-        "email": "cbuntingde@gmail.com"
-      },
-      "source": "./plugins/auto-memory-plugin",
-      "license": "MIT"
-    },
-    {
       "name": "auto-quality-gates",
       "version": "1.0.0",
       "description": "Comprehensive automated testing and quality gates configuration framework for Claude Code.",
@@ -114,17 +103,6 @@
         "email": "cbuntingde@gmail.com"
       },
       "source": "./plugins/auto-quality-gates",
-      "license": "MIT"
-    },
-    {
-      "name": "bug-catcher-plugin",
-      "version": "1.0.0",
-      "description": "Automatically captures tool execution failures and provides commands to view them in a formatted table.",
-      "author": {
-        "name": "Chris Bunting",
-        "email": "cbuntingde@gmail.com"
-      },
-      "source": "./plugins/bug-catcher-plugin",
       "license": "MIT"
     },
     {

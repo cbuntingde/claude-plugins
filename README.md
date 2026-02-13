@@ -86,7 +86,7 @@ cd claude-plugins
 | [QA Assistant](plugins/qa-assistant/) | Comprehensive quality assurance and production readiness checks including breaking change detection | Quality Assurance |
 | [Auto Quality Gates](plugins/auto-quality-gates/) | Comprehensive automated testing and quality gates configuration framework | Quality Assurance |
 | [Testing Assistant](plugins/testing-assistant-plugin/) | Enterprise-grade testing assistant - automated test generation, edge case identification, and test quality improvement | Testing |
-| [Bug Catcher Plugin](plugins/bug-catcher-plugin/) | Automatically captures tool execution failures and provides commands to view them in a formatted table | Testing |
+
 | [Mock API Server](plugins/mock-api-server/) | Create, configure, and manage mock API servers for testing and development | Testing |
 
 ### Performance & Optimization
